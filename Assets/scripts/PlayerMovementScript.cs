@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovementScript : MonoBehaviour
 {
-    // [SerializeField] float runSpeed = 10f;
+    [SerializeField] float runSpeed = 10f;
 
 
     Vector2 moveInput;
@@ -16,7 +16,7 @@ public class PlayerMovementScript : MonoBehaviour
         myRigidbody = GetComponent<Rigidbody2D>();
     }
 
-    void update()
+    void Update()
     {
         Run();
     } 
@@ -29,8 +29,8 @@ public class PlayerMovementScript : MonoBehaviour
 
     void Run()
     {
-        // Vector2 playerVelocity = new Vector2(moveInput.x * runSpeed, Rigidbody.velocity.y); 
-        myRigidbody.velocity = moveInput;   
+        Vector2 playerVelocity = new Vector2(moveInput.x * runSpeed, myRigidbody.velocity.y); 
+        myRigidbody.velocity = playerVelocity;   
     }
 
 }
