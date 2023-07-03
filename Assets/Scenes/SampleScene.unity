@@ -837,6 +837,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 955101580947402864, guid: 40215e400ebc24f3a910de556fd65691, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2128278508668184595, guid: 40215e400ebc24f3a910de556fd65691, type: 3}
       propertyPath: m_Name
       value: Koli Girl Final1687428085 Variant
@@ -2277,68 +2281,6 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
---- !u!1 &1574373489 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8022260362172764730, guid: 93924fd716d8785498c5e9a65327c986, type: 3}
-  m_PrefabInstance: {fileID: 6381244242597376547}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1574373497
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1574373489}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 4b4f8b1d248612a438c7a9a24637ec38, type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
---- !u!50 &1574373498
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1574373489}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
 --- !u!1 &2028068901
 GameObject:
   m_ObjectHideFlags: 0
@@ -8390,84 +8332,3 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!1001 &6381244242597376547
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3206607400474407728, guid: 93924fd716d8785498c5e9a65327c986, type: 3}
-      propertyPath: m_BodyType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3206607400474407728, guid: 93924fd716d8785498c5e9a65327c986, type: 3}
-      propertyPath: m_SleepingMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3206607400474407728, guid: 93924fd716d8785498c5e9a65327c986, type: 3}
-      propertyPath: m_CollisionDetection
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8022260362172764730, guid: 93924fd716d8785498c5e9a65327c986, type: 3}
-      propertyPath: m_Name
-      value: ginger(player)
-      objectReference: {fileID: 0}
-    - target: {fileID: 8680876159600053010, guid: 93924fd716d8785498c5e9a65327c986, type: 3}
-      propertyPath: m_RootOrder
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8680876159600053010, guid: 93924fd716d8785498c5e9a65327c986, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -5.36
-      objectReference: {fileID: 0}
-    - target: {fileID: 8680876159600053010, guid: 93924fd716d8785498c5e9a65327c986, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 3.79
-      objectReference: {fileID: 0}
-    - target: {fileID: 8680876159600053010, guid: 93924fd716d8785498c5e9a65327c986, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.019524049
-      objectReference: {fileID: 0}
-    - target: {fileID: 8680876159600053010, guid: 93924fd716d8785498c5e9a65327c986, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8680876159600053010, guid: 93924fd716d8785498c5e9a65327c986, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8680876159600053010, guid: 93924fd716d8785498c5e9a65327c986, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8680876159600053010, guid: 93924fd716d8785498c5e9a65327c986, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8680876159600053010, guid: 93924fd716d8785498c5e9a65327c986, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8680876159600053010, guid: 93924fd716d8785498c5e9a65327c986, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8680876159600053010, guid: 93924fd716d8785498c5e9a65327c986, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4155146764895042, guid: 93924fd716d8785498c5e9a65327c986, type: 3}
-    - {fileID: 3206607400474407728, guid: 93924fd716d8785498c5e9a65327c986, type: 3}
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8022260362172764730, guid: 93924fd716d8785498c5e9a65327c986, type: 3}
-      insertIndex: 4
-      addedObject: {fileID: 1574373498}
-    - targetCorrespondingSourceObject: {fileID: 8022260362172764730, guid: 93924fd716d8785498c5e9a65327c986, type: 3}
-      insertIndex: 5
-      addedObject: {fileID: 1574373497}
-  m_SourcePrefab: {fileID: 100100000, guid: 93924fd716d8785498c5e9a65327c986, type: 3}
