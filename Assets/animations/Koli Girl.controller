@@ -140,7 +140,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Koli Girl Final1687428085
+  m_Name: Koli Girl
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: isRunning
