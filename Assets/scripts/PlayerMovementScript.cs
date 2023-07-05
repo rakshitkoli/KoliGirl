@@ -37,8 +37,8 @@ public class PlayerMovementScript : MonoBehaviour
         if(!myCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ground"))) { return;}
         if(value.isPressed)
         {
-           // do stuff
            myRigidbody.velocity += new Vector2 (0f,jumpSpeed);
+           myAnimator.SetTrigger("jump");
         }
     }
 
