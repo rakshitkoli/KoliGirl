@@ -12,13 +12,12 @@ public class PlayerMovementScript : MonoBehaviour
     Rigidbody2D myRigidbody;
     Animator myAnimator;
     CapsuleCollider2D myCapsuleCollider;
-    
-    void Start() 
-     {
+
+    void Start()
+    {
         myRigidbody = GetComponent<Rigidbody2D>();  
         myAnimator = GetComponent<Animator>();
         myCapsuleCollider = GetComponent<CapsuleCollider2D>();
-        
     }
 
     void Update()
