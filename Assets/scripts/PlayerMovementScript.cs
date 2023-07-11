@@ -8,17 +8,18 @@ public class PlayerMovementScript : MonoBehaviour
     [SerializeField] float runSpeed = 10f;
     [SerializeField] float jumpSpeed = 5f;
 
-    Vector2 moveInput;
-    Rigidbody2D myRigidbody;
-    Animator myAnimator;
-    CapsuleCollider2D myCapsuleCollider;
+    public ParticleSystem dust;
+    public Vector2 moveInput;
+    public Rigidbody2D myRigidbody;
+    public Animator myAnimator;
+    public CapsuleCollider2D myCapsuleCollider;
     
     void Start() 
      {
         myRigidbody = GetComponent<Rigidbody2D>();  
         myAnimator = GetComponent<Animator>();
         myCapsuleCollider = GetComponent<CapsuleCollider2D>();
-        
+        StopDust();
     }
 
     void Update()
@@ -40,17 +41,32 @@ public class PlayerMovementScript : MonoBehaviour
         {
            myRigidbody.velocity += new Vector2 (0f,jumpSpeed);
            myAnimator.SetTrigger("jump");
+           StopDust();
         }
     }
 
+    bool isRunning = false;
+
     void Run()
     {
-        Vector2 playerVelocity = new Vector2(moveInput.x * runSpeed, myRigidbody.velocity.y); 
-        myRigidbody.velocity = playerVelocity;   
-
+        Vector2 playerVelocity = new Vector2(moveInput.x * runSpeed, myRigidbody.velocity.y);
+        myRigidbody.velocity = playerVelocity;
         bool playerHasHorizontalSpeed = Mathf.Abs(myRigidbody.velocity.x) > Mathf.Epsilon;
-        myAnimator.SetBool("isRunning",playerHasHorizontalSpeed);
+
+        if (playerHasHorizontalSpeed && !isRunning)
+        {
+            CreateDust();
+            isRunning = true;
+        }
+        else if (!playerHasHorizontalSpeed && isRunning)
+        {
+            StopDust();
+            isRunning = false;
+        }
+
+        myAnimator.SetBool("isRunning", playerHasHorizontalSpeed);
     }
+
     
     void FlipSprite()
     {
@@ -59,5 +75,15 @@ public class PlayerMovementScript : MonoBehaviour
         {
             transform.localScale = new Vector2(Mathf.Sign(myRigidbody.velocity.x)*0.2f, 0.2f);
         }
+    }
+
+    void CreateDust()
+    {
+        dust.Play();
+    }
+
+    void StopDust()
+    {
+        dust.Stop();
     }
 }
