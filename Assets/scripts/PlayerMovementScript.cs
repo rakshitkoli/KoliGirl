@@ -53,7 +53,7 @@ public class PlayerMovementScript : MonoBehaviour
         myRigidbody.velocity = playerVelocity;
         bool playerHasHorizontalSpeed = Mathf.Abs(myRigidbody.velocity.x) > Mathf.Epsilon;
 
-        if (playerHasHorizontalSpeed && !isRunning)
+        if (playerHasHorizontalSpeed && !isRunning && myCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
         {
             CreateDust();
             isRunning = true;
