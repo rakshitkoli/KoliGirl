@@ -1,5 +1,5 @@
 {
-    "name": "My tileveniya",
+    "name": "Koli Girl IS",
     "maps": [
         {
             "name": "Player",
@@ -278,6 +278,17 @@
                     "name": "",
                     "id": "f5210eb5-a237-47eb-9a0f-65aaaee5a63c",
                     "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "93d53306-ffdb-4f1c-9a01-0cf382fa6978",
+                    "path": "<Keyboard>/upArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
