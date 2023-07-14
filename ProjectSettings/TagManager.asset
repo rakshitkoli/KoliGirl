@@ -41,6 +41,9 @@ TagManager:
   - name: background
     uniqueID: 655563821
     locked: 0
+  - name: Bushes
+    uniqueID: 463083031
+    locked: 0
   - name: player
     uniqueID: 3277197921
     locked: 0
