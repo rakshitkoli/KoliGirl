@@ -96,3 +96,10 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# Unity Editor crash dumps
+mono_crash.mem.*.blob
+
+# Debug/dev screenshots captured via MCP tooling, not real project assets
+/[Aa]ssets/[Ss]creenshots/
+/[Aa]ssets/[Ss]creenshots.meta
