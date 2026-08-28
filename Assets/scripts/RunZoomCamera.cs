@@ -1,4 +1,4 @@
-using Cinemachine;
+using Unity.Cinemachine;
 using UnityEngine;
 
 /// <summary>
@@ -27,7 +27,7 @@ public class RunZoomCamera : MonoBehaviour
 
         float targetSize = player.IsRunning ? runSize : normalSize;
 
-        LensSettings lens = vcam.m_Lens;
+        LegacyLensSettings lens = vcam.m_Lens;
         lens.OrthographicSize = Mathf.Lerp(lens.OrthographicSize, targetSize, Time.deltaTime * zoomLerpSpeed);
         vcam.m_Lens = lens;
     }

@@ -35,7 +35,7 @@ public class PlayerMovementScript : MonoBehaviour
 
         // Refill jumps only once grounded and no longer moving upward, so the tail end of a
         // jump's ascent (which can still briefly overlap the Ground layer) doesn't refill early.
-        if (myRigidbody.velocity.y <= 0f && myCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
+        if (myRigidbody.linearVelocity.y <= 0f && myCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
         {
             jumpsRemaining = maxJumps;
         }
@@ -56,7 +56,7 @@ public class PlayerMovementScript : MonoBehaviour
 
         // Set (not add) vertical velocity so the second jump is a consistent height
         // regardless of whether the player is still rising or already falling.
-        myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, jumpSpeed);
+        myRigidbody.linearVelocity = new Vector2(myRigidbody.linearVelocity.x, jumpSpeed);
         jumpsRemaining--;
         myAnimator.SetTrigger("jump");
         StopDust();
@@ -71,7 +71,7 @@ public class PlayerMovementScript : MonoBehaviour
         IsDead = true;
 
         moveInput = Vector2.zero;
-        myRigidbody.velocity = Vector2.zero;
+        myRigidbody.linearVelocity = Vector2.zero;
         myAnimator.SetTrigger("Dying");
         StopDust();
 
@@ -89,9 +89,9 @@ public class PlayerMovementScript : MonoBehaviour
 
     void Run()
     {
-        Vector2 playerVelocity = new Vector2(moveInput.x * runSpeed, myRigidbody.velocity.y);
-        myRigidbody.velocity = playerVelocity;
-        bool playerHasHorizontalSpeed = Mathf.Abs(myRigidbody.velocity.x) > Mathf.Epsilon;
+        Vector2 playerVelocity = new Vector2(moveInput.x * runSpeed, myRigidbody.linearVelocity.y);
+        myRigidbody.linearVelocity = playerVelocity;
+        bool playerHasHorizontalSpeed = Mathf.Abs(myRigidbody.linearVelocity.x) > Mathf.Epsilon;
 
         if (playerHasHorizontalSpeed && !isRunning && myCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
         {
@@ -110,10 +110,10 @@ public class PlayerMovementScript : MonoBehaviour
     
     void FlipSprite()
     {
-        bool playerHasHorizontalSpeed = Mathf.Abs(myRigidbody.velocity.x) > Mathf.Epsilon;
+        bool playerHasHorizontalSpeed = Mathf.Abs(myRigidbody.linearVelocity.x) > Mathf.Epsilon;
         if (playerHasHorizontalSpeed)
         {
-            transform.localScale = new Vector2(Mathf.Sign(myRigidbody.velocity.x)*0.2f, 0.2f);
+            transform.localScale = new Vector2(Mathf.Sign(myRigidbody.linearVelocity.x)*0.2f, 0.2f);
         }
     }
 
