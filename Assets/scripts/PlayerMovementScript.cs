@@ -9,6 +9,13 @@ public class PlayerMovementScript : MonoBehaviour
     [SerializeField] float jumpSpeed = 5f;
     [SerializeField] int maxJumps = 2; // 1 = single jump, 2 = double jump
 
+    // Grace window after losing ground contact during which a jump/refill still counts as
+    // "grounded". Covers the case where running fast over uneven ground (collider seams,
+    // slight bumps) causes IsTouchingLayers to flicker false for a stray frame or two -
+    // without this, that flicker can eat the jump refill and make jump feel like it randomly
+    // stops working after running for a while.
+    [SerializeField] float coyoteTime = 0.12f;
+
     public ParticleSystem dust;
     public Vector2 moveInput;
     public Rigidbody2D myRigidbody;
@@ -18,12 +25,15 @@ public class PlayerMovementScript : MonoBehaviour
     public bool IsDead { get; private set; }
 
     int jumpsRemaining;
+    float lastGroundedTime = -999f;
+    int groundMask;
 
     void Start()
      {
         myRigidbody = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
         myCapsuleCollider = GetComponent<CapsuleCollider2D>();
+        groundMask = LayerMask.GetMask("Ground");
         StopDust();
     }
 
@@ -33,9 +43,15 @@ public class PlayerMovementScript : MonoBehaviour
         Run();
         FlipSprite();
 
-        // Refill jumps only once grounded and no longer moving upward, so the tail end of a
-        // jump's ascent (which can still briefly overlap the Ground layer) doesn't refill early.
-        if (myRigidbody.linearVelocity.y <= 0f && myCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
+        if (myCapsuleCollider.IsTouchingLayers(groundMask))
+        {
+            lastGroundedTime = Time.time;
+        }
+
+        // Refill jumps once grounded (within the coyote-time grace window) and no longer
+        // moving upward, so the tail end of a jump's ascent doesn't refill early.
+        bool recentlyGrounded = Time.time - lastGroundedTime <= coyoteTime;
+        if (myRigidbody.linearVelocity.y <= 0f && recentlyGrounded)
         {
             jumpsRemaining = maxJumps;
         }
@@ -93,7 +109,7 @@ public class PlayerMovementScript : MonoBehaviour
         myRigidbody.linearVelocity = playerVelocity;
         bool playerHasHorizontalSpeed = Mathf.Abs(myRigidbody.linearVelocity.x) > Mathf.Epsilon;
 
-        if (playerHasHorizontalSpeed && !isRunning && myCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
+        if (playerHasHorizontalSpeed && !isRunning && myCapsuleCollider.IsTouchingLayers(groundMask))
         {
             CreateDust();
             isRunning = true;
@@ -125,5 +141,6 @@ public class PlayerMovementScript : MonoBehaviour
     void StopDust()
     {
         dust.Stop();
+        isRunning = false;
     }
 }
