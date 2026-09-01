@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: c67ca31d1a6d34aafb2d98e4bc784519
+guid: 2f19f4a3f67994909a049cb5a36364fa
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1752509830243858738
-    second: Tide_Water_0
+      213: -8606595741091045441
+    second: Tide_Water_1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -40,9 +40,9 @@ TextureImporter:
     filterMode: 1
     aniso: 1
     mipBias: 0
-    wrapU: 1
-    wrapV: 1
-    wrapW: 1
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Tide_Water_0
+      name: Tide_Water_1_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 512
-        height: 161
+        height: 160
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 239b019c76a225810800000000000000
-      internalID: 1752509830243858738
+      spriteID: fbfd0eee5ca3f8880800000000000000
+      internalID: -8606595741091045441
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Tide_Water_0: 1752509830243858738
+      Tide_Water_1_0: -8606595741091045441
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
