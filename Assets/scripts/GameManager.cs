@@ -41,6 +41,15 @@ public class GameManager : MonoBehaviour
     // is a sentinel meaning "not seeded yet this run".
     private static int livesRemaining = int.MinValue;
 
+    // Checkpoint state - static for the same reload-survival reason as livesRemaining above.
+    // checkpointSceneName guards against a checkpoint from one level ever applying to a
+    // different one (e.g. stale state if something odd happens with scene load order);
+    // it's also cleared explicitly on every level-complete/game-over transition below.
+    private static bool hasCheckpoint;
+    private static string checkpointSceneName;
+    private static Vector3 checkpointPosition;
+    private static int checkpointCoinsCollected;
+
     private int score;
 
     public int CoinsCollected { get; private set; }
@@ -62,9 +71,54 @@ public class GameManager : MonoBehaviour
             livesRemaining = livesPerLevel;
         }
 
+        ApplyCheckpointIfAny();
+
         UpdateScoreUI();
         UpdateLivesUI();
         UpdateCoinsUI();
+    }
+
+    /// <summary>Called by Checkpoint when the player first touches it. Remembers where to
+    /// respawn on a future death within this same level, and locks in coin progress so
+    /// already-collected coins aren't lost on respawn.</summary>
+    public void SetCheckpoint(Vector3 position)
+    {
+        hasCheckpoint = true;
+        checkpointSceneName = SceneManager.GetActiveScene().name;
+        checkpointPosition = position;
+        checkpointCoinsCollected = CoinsCollected;
+    }
+
+    private void ClearCheckpoint()
+    {
+        hasCheckpoint = false;
+        checkpointSceneName = null;
+    }
+
+    /// <summary>If a checkpoint was set earlier in this same level, moves the just-spawned
+    /// player there and restores coin progress. Runs from Awake(), before any Start() has
+    /// fired, so this happens before the player or camera do anything with the default
+    /// scene position.</summary>
+    private void ApplyCheckpointIfAny()
+    {
+        if (!hasCheckpoint || checkpointSceneName != SceneManager.GetActiveScene().name)
+        {
+            return;
+        }
+
+        CoinsCollected = checkpointCoinsCollected;
+        UpdateCoinsUI();
+
+        var player = FindFirstObjectByType<PlayerMovementScript>();
+        if (player == null) return;
+
+        player.transform.position = checkpointPosition;
+        var rb = player.GetComponent<Rigidbody2D>();
+        if (rb != null)
+        {
+            rb.position = checkpointPosition;
+            rb.linearVelocity = Vector2.zero;
+        }
     }
 
     public void AddScore(int amount)
@@ -134,6 +188,7 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(deathRestartDelay);
         livesRemaining = livesPerLevel;
+        ClearCheckpoint();
         SceneManager.LoadScene("Start Menu");
     }
 
@@ -163,6 +218,7 @@ public class GameManager : MonoBehaviour
     private IEnumerator LoadNextLevelAfterDelay()
     {
         yield return new WaitForSeconds(deathRestartDelay);
+        ClearCheckpoint();
         SceneManager.LoadScene(nextSceneName);
     }
 }
