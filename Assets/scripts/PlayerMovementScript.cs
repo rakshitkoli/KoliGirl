@@ -27,6 +27,7 @@ public class PlayerMovementScript : MonoBehaviour
     int jumpsRemaining;
     float lastGroundedTime = -999f;
     int groundMask;
+    float baseScaleMagnitude;
 
     void Start()
      {
@@ -34,6 +35,11 @@ public class PlayerMovementScript : MonoBehaviour
         myAnimator = GetComponent<Animator>();
         myCapsuleCollider = GetComponent<CapsuleCollider2D>();
         groundMask = LayerMask.GetMask("Ground");
+        // Cache once, at whatever scale this character was placed at - FlipSprite() below
+        // only ever flips the sign, never overwrites the magnitude, so this works for any
+        // character's own scale (not hardcoded to Koli Girl's 0.2) and can't drift even if
+        // something reparents this object under a differently-scaled transform later.
+        baseScaleMagnitude = Mathf.Abs(transform.localScale.x);
         StopDust();
     }
 
@@ -129,7 +135,7 @@ public class PlayerMovementScript : MonoBehaviour
         bool playerHasHorizontalSpeed = Mathf.Abs(myRigidbody.linearVelocity.x) > Mathf.Epsilon;
         if (playerHasHorizontalSpeed)
         {
-            transform.localScale = new Vector2(Mathf.Sign(myRigidbody.linearVelocity.x)*0.2f, 0.2f);
+            transform.localScale = new Vector2(Mathf.Sign(myRigidbody.linearVelocity.x) * baseScaleMagnitude, baseScaleMagnitude);
         }
     }
 
