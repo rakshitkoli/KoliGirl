@@ -225,7 +225,7 @@ GameObject:
   - component: {fileID: 44263320}
   - component: {fileID: 44263323}
   m_Layer: 0
-  m_Name: Coin (3)
+  m_Name: Golden Fish (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -295,7 +295,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.4
+  m_Radius: 0.493
 --- !u!212 &44263322
 SpriteRenderer:
   serializedVersion: 3
@@ -345,7 +345,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 5
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 3726e6c95406a4b0ca3e791e4a7f4529, type: 3}
+  m_Sprite: {fileID: -5731128018055617505, guid: 11f0f6fb476ba488295266831734e8e4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -6503,7 +6503,7 @@ GameObject:
   - component: {fileID: 394032431}
   - component: {fileID: 394032434}
   m_Layer: 0
-  m_Name: Coin (1)
+  m_Name: Golden Fish (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6573,7 +6573,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.4
+  m_Radius: 0.493
 --- !u!212 &394032433
 SpriteRenderer:
   serializedVersion: 3
@@ -6623,7 +6623,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 5
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 3726e6c95406a4b0ca3e791e4a7f4529, type: 3}
+  m_Sprite: {fileID: -5731128018055617505, guid: 11f0f6fb476ba488295266831734e8e4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -21945,7 +21945,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3726e6c95406a4b0ca3e791e4a7f4529, type: 3}
+  m_Sprite: {fileID: -5731128018055617505, guid: 11f0f6fb476ba488295266831734e8e4, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -27492,6 +27492,7 @@ MonoBehaviour:
   coinText: {fileID: 1445298708}
   livesPerLevel: 3
   livesText: {fileID: 1508246285}
+  respawnInvulnerability: 1.5
   nextSceneName: Level2
 --- !u!1 &1222184389
 GameObject:
@@ -33102,7 +33103,7 @@ GameObject:
   - component: {fileID: 1403591189}
   - component: {fileID: 1403591192}
   m_Layer: 0
-  m_Name: Coin (2)
+  m_Name: Golden Fish (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33172,7 +33173,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.4
+  m_Radius: 0.493
 --- !u!212 &1403591191
 SpriteRenderer:
   serializedVersion: 3
@@ -33222,7 +33223,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 5
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 3726e6c95406a4b0ca3e791e4a7f4529, type: 3}
+  m_Sprite: {fileID: -5731128018055617505, guid: 11f0f6fb476ba488295266831734e8e4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
