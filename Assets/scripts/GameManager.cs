@@ -212,6 +212,12 @@ public class GameManager : MonoBehaviour
     /// behavior (for the last level in the game, until a real end screen exists).</summary>
     public void CompleteLevel()
     {
+        var levelNumber = LevelProgress.ParseLevelNumber(SceneManager.GetActiveScene().name);
+        if (levelNumber.HasValue)
+        {
+            LevelProgress.MarkCompleted(levelNumber.Value);
+        }
+
         if (!string.IsNullOrEmpty(nextSceneName))
         {
             StartCoroutine(LoadNextLevelAfterDelay());
