@@ -16,6 +16,15 @@ public class PlayerMovementScript : MonoBehaviour
     // stops working after running for a while.
     [SerializeField] float coyoteTime = 0.12f;
 
+    [Header("Duck")]
+    [Tooltip("Move.y is already bound to S/Down-arrow for both keyboard layouts, so ducking " +
+        "reuses that input instead of needing a new action - hold down while grounded.")]
+    [SerializeField] float duckInputThreshold = -0.5f;
+    [Tooltip("Fraction of the standing collider height used while ducking (and the sprite's " +
+        "vertical squash) - shrinks the hitbox down and in from the top so overhead hazards " +
+        "that would otherwise clip the player can be ducked under.")]
+    [SerializeField] [Range(0.3f, 0.9f)] float duckHeightScale = 0.55f;
+
     public ParticleSystem dust;
     public Vector2 moveInput;
     public Rigidbody2D myRigidbody;
@@ -40,6 +49,11 @@ public class PlayerMovementScript : MonoBehaviour
     SpriteRenderer spriteRenderer;
     Coroutine invulnerabilityRoutine;
 
+    public bool IsDucking { get; private set; }
+    float facingSign = 1f;
+    float standingColliderHeight;
+    float standingColliderOffsetY;
+
     void Start()
      {
         myRigidbody = GetComponent<Rigidbody2D>();
@@ -52,16 +66,21 @@ public class PlayerMovementScript : MonoBehaviour
         // character's own scale (not hardcoded to Koli Girl's 0.2) and can't drift even if
         // something reparents this object under a differently-scaled transform later.
         baseScaleMagnitude = Mathf.Abs(transform.localScale.x);
+        standingColliderHeight = myCapsuleCollider.size.y;
+        standingColliderOffsetY = myCapsuleCollider.offset.y;
         StopDust();
     }
 
     void Update()
     {
         if (IsDead) return;
+
+        bool grounded = myCapsuleCollider.IsTouchingLayers(groundMask);
+        HandleDuck(grounded);
         Run();
         FlipSprite();
 
-        if (myCapsuleCollider.IsTouchingLayers(groundMask))
+        if (grounded)
         {
             lastGroundedTime = Time.time;
         }
@@ -85,6 +104,7 @@ public class PlayerMovementScript : MonoBehaviour
     void OnJump(InputValue value)
     {
         if (IsDead) return;
+        if (IsDucking) return;
         if (!value.isPressed) return;
         if (jumpsRemaining <= 0) return;
 
@@ -142,15 +162,20 @@ public class PlayerMovementScript : MonoBehaviour
         invulnerabilityRoutine = null;
     }
 
-    /// <summary>True while there's horizontal movement input, regardless of whether the
-    /// player is grounded or mid-air. Used by camera effects (e.g. zoom-on-run).</summary>
-    public bool IsRunning { get { return Mathf.Abs(moveInput.x) > Mathf.Epsilon; } }
+    /// <summary>True while actually moving horizontally, regardless of whether the player is
+    /// grounded or mid-air. Used by camera effects (e.g. zoom-on-run) - reads the rigidbody's
+    /// velocity rather than raw input so it stays false while ducking holds a direction but
+    /// zeroes actual movement (see Run()).</summary>
+    public bool IsRunning { get { return Mathf.Abs(myRigidbody.linearVelocity.x) > Mathf.Epsilon; } }
 
     bool isRunning = false;
 
     void Run()
     {
-        Vector2 playerVelocity = new Vector2(moveInput.x * runSpeed, myRigidbody.linearVelocity.y);
+        // Ducking plants the player in place (like most platformers - it's a dodge pose, not
+        // a crouch-walk) rather than just slowing them down.
+        float x = IsDucking ? 0f : moveInput.x;
+        Vector2 playerVelocity = new Vector2(x * runSpeed, myRigidbody.linearVelocity.y);
         myRigidbody.linearVelocity = playerVelocity;
         bool playerHasHorizontalSpeed = Mathf.Abs(myRigidbody.linearVelocity.x) > Mathf.Epsilon;
 
@@ -168,14 +193,35 @@ public class PlayerMovementScript : MonoBehaviour
         myAnimator.SetBool("isRunning", playerHasHorizontalSpeed);
     }
 
-    
+    /// <summary>Reuses the existing Move.y axis (already bound to S/Down-arrow) rather than a
+    /// new input action - down while grounded shrinks the collider from the top and squashes
+    /// the sprite to match, so an overhead hazard that would otherwise clip the player can be
+    /// ducked under. Releasing (or leaving the ground) snaps back to standing.</summary>
+    void HandleDuck(bool grounded)
+    {
+        bool wantsDuck = grounded && moveInput.y < duckInputThreshold;
+        if (wantsDuck == IsDucking) return;
+
+        IsDucking = wantsDuck;
+        float scale = IsDucking ? duckHeightScale : 1f;
+        float duckedHeight = standingColliderHeight * scale;
+
+        myCapsuleCollider.size = new Vector2(myCapsuleCollider.size.x, duckedHeight);
+        myCapsuleCollider.offset = new Vector2(
+            myCapsuleCollider.offset.x,
+            standingColliderOffsetY - (standingColliderHeight - duckedHeight) * 0.5f);
+    }
+
     void FlipSprite()
     {
         bool playerHasHorizontalSpeed = Mathf.Abs(myRigidbody.linearVelocity.x) > Mathf.Epsilon;
         if (playerHasHorizontalSpeed)
         {
-            transform.localScale = new Vector2(Mathf.Sign(myRigidbody.linearVelocity.x) * baseScaleMagnitude, baseScaleMagnitude);
+            facingSign = Mathf.Sign(myRigidbody.linearVelocity.x);
         }
+
+        float duckSquash = IsDucking ? duckHeightScale : 1f;
+        transform.localScale = new Vector3(facingSign * baseScaleMagnitude, baseScaleMagnitude * duckSquash, transform.localScale.z);
     }
 
     void CreateDust()
