@@ -59,6 +59,12 @@ public class PlayerMovementScript : MonoBehaviour
         "visual cue that contact won't kill right now.")]
     [SerializeField] float invulnerabilityBlinkInterval = 0.1f;
 
+    /// <summary>Only one Koli Girl exists per level, so a simple static reference (set in
+    /// Awake, same pattern as GameManager.Instance) is enough for the touch-controls buttons -
+    /// see TouchTapButton/TouchMovementController - to find her without a per-scene serialized
+    /// reference that would need re-wiring in every level.</summary>
+    public static PlayerMovementScript Instance { get; private set; }
+
     public bool IsDead { get; private set; }
 
     /// <summary>True for a short window after a checkpoint respawn (see GrantInvulnerability) -
@@ -104,6 +110,11 @@ public class PlayerMovementScript : MonoBehaviour
     /// Run() already sets velocity.x fresh from moveInput every Update(), so anything added any
     /// other way would just get overwritten the same frame.</summary>
     float windPush;
+
+    void Awake()
+    {
+        Instance = this;
+    }
 
     void Start()
      {
@@ -176,10 +187,24 @@ public class PlayerMovementScript : MonoBehaviour
 
     void OnJump(InputValue value)
     {
+        if (!value.isPressed) return;
+        PerformJump();
+    }
+
+    /// <summary>Touch-UI jump button calls this directly (see TouchTapButton) instead of going
+    /// through the Input System's InputValue plumbing - there's no bound control path for a
+    /// screen tap, so the on-screen button is its own input source rather than feeding a virtual
+    /// device. Same guards and effect as the keyboard/gamepad path via OnJump above.</summary>
+    public void TouchJump()
+    {
+        PerformJump();
+    }
+
+    void PerformJump()
+    {
         if (IsDead) return;
         if (IsDucking) return;
         if (IsSnared) return;
-        if (!value.isPressed) return;
         if (jumpsRemaining <= 0) return;
 
         // Set (not add) vertical velocity so the second jump is a consistent height
@@ -194,6 +219,13 @@ public class PlayerMovementScript : MonoBehaviour
     {
         if (IsDead) return;
         if (!value.isPressed) return;
+        TryDash();
+    }
+
+    /// <summary>Touch-UI dash button calls this directly - same reasoning as TouchJump above.</summary>
+    public void TouchDash()
+    {
+        if (IsDead) return;
         TryDash();
     }
 
