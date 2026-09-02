@@ -103,10 +103,10 @@ TextureImporter:
       name: Checkpoint_Flag_0
       rect:
         serializedVersion: 2
-        x: 89
+        x: 87
         y: 6
-        width: 151
-        height: 338
+        width: 152
+        height: 350
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
