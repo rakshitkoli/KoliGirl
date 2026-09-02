@@ -163,7 +163,7 @@ public class GameManager : MonoBehaviour
     {
         if (coinText != null)
         {
-            coinText.text = $"{CoinsCollected} / {totalCoins}";
+            coinText.text = $"{CoinsCollected}/{totalCoins}";
         }
     }
 
