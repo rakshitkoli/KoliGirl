@@ -241,7 +241,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -10, y: -1.16, z: 0}
-  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
+  m_LocalScale: {x: 1.8199999, y: 1.8199999, z: 1.8199999}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 15697023}
@@ -295,7 +295,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.493
+  m_Radius: 0.6409
 --- !u!212 &44263322
 SpriteRenderer:
   serializedVersion: 3
@@ -7564,7 +7564,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 5, y: -1.15, z: 0}
-  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
+  m_LocalScale: {x: 1.8199999, y: 1.8199999, z: 1.8199999}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 557046220}
@@ -7618,7 +7618,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.493
+  m_Radius: 0.6409
 --- !u!212 &394032433
 SpriteRenderer:
   serializedVersion: 3
@@ -36409,7 +36409,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 22, y: -1.15, z: 0}
-  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
+  m_LocalScale: {x: 1.8199999, y: 1.8199999, z: 1.8199999}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1814081420}
@@ -36463,7 +36463,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.493
+  m_Radius: 0.6409
 --- !u!212 &1403591191
 SpriteRenderer:
   serializedVersion: 3
