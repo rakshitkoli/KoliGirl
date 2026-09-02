@@ -17860,7 +17860,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6db057db5f394f53b4977674334b4f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Checkpoint
-  activeSprite: {fileID: 0}
+  activeSprite: {fileID: 8015677675299385924, guid: 9e8317159ba3f476da2cbfc9edd5ca14, type: 3}
 --- !u!61 &362830696
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -52273,6 +52273,7 @@ MonoBehaviour:
   coinText: {fileID: 1445298708}
   livesPerLevel: 3
   livesText: {fileID: 1508246285}
+  respawnInvulnerability: 1.5
   nextSceneName: Level5
 --- !u!1 &1170320725
 GameObject:
