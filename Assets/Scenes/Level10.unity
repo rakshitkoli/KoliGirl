@@ -25504,43 +25504,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!70 &732491276
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2128278509981134374}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0.07, y: 0.95}
-  m_Size: {x: 7.0883617, y: 18.66882}
-  m_Direction: 0
 --- !u!212 &732491277
 SpriteRenderer:
   serializedVersion: 3
@@ -50282,7 +50245,7 @@ PrefabInstance:
     - target: {fileID: 3920772574805505166, guid: 40215e400ebc24f3a910de556fd65691, type: 3}
       propertyPath: myCapsuleCollider
       value: 
-      objectReference: {fileID: 732491276}
+      objectReference: {fileID: 0}
     - target: {fileID: 4011707468465713289, guid: 40215e400ebc24f3a910de556fd65691, type: 3}
       propertyPath: m_Layer
       value: 7
@@ -50462,9 +50425,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2128278508668184595, guid: 40215e400ebc24f3a910de556fd65691, type: 3}
       insertIndex: -1
       addedObject: {fileID: 732491271}
-    - targetCorrespondingSourceObject: {fileID: 2128278508668184595, guid: 40215e400ebc24f3a910de556fd65691, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 732491276}
     - targetCorrespondingSourceObject: {fileID: 2128278508668184595, guid: 40215e400ebc24f3a910de556fd65691, type: 3}
       insertIndex: -1
       addedObject: {fileID: 732491277}

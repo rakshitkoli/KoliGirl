@@ -16,6 +16,11 @@ public class LevelExit : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private bool isOpen;
 
+    // Same double-fire guard as CoinPickup/LifePickup - without it, two overlapping player
+    // colliders would call CompleteLevel() twice in one frame and start two "load next level"
+    // coroutines.
+    private bool completing;
+
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -35,8 +40,11 @@ public class LevelExit : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (completing) return;
         if (!isOpen) return;
         if (other.GetComponent<PlayerMovementScript>() == null) return;
+
+        completing = true;
 
         if (GameManager.Instance != null)
         {

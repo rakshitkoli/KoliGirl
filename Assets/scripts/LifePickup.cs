@@ -8,9 +8,16 @@ public class LifePickup : MonoBehaviour
 {
     [SerializeField] private int amount = 1;
 
+    // Same double-fire guard as CoinPickup - see its comment for why this is needed even
+    // though SetActive(false) below looks like it should be enough on its own.
+    private bool collected;
+
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (collected) return;
         if (other.GetComponent<PlayerMovementScript>() == null) return;
+
+        collected = true;
 
         if (GameManager.Instance != null)
         {
