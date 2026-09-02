@@ -41,6 +41,14 @@ public class GameManager : MonoBehaviour
         "level in the game - CompleteLevel() then falls back to the pause + levelCompletePanel behavior.")]
     [SerializeField] private string nextSceneName = "";
 
+    [Header("Continue with Ad (optional - safe to leave unassigned)")]
+    [Tooltip("Shown when lives run out, offering a rewarded ad for one more life instead of " +
+        "going straight to Game Over. Needs a \"Watch Ad\" button wired to WatchAdForExtraLife() " +
+        "and a \"No Thanks\" button wired to DeclineContinue(). Falls back straight to the normal " +
+        "game-over flow if left unassigned, or if AdsManager has no ad ready yet - never blocks " +
+        "the player waiting on an ad that isn't there.")]
+    [SerializeField] private GameObject continuePanel;
+
     // Static so a death's scene reload doesn't wipe the count (a fresh GameManager.Awake()
     // runs every reload) - but still resets to a full set each time the game itself is
     // actually (re)started, since static fields reinitialize on domain reload. int.MinValue
@@ -71,6 +79,12 @@ public class GameManager : MonoBehaviour
         }
 
         Instance = this;
+
+        // Defensive reset: the continue-panel flow below pauses via Time.timeScale = 0f, same
+        // as the existing levelCompletePanel path - if a scene ever loads while that's still
+        // zero (e.g. quitting out mid-pause), nothing else resets it, so every level would come
+        // up frozen. Cheap enough to just always reset it here.
+        Time.timeScale = 1f;
 
         if (livesRemaining == int.MinValue)
         {
@@ -186,17 +200,57 @@ public class GameManager : MonoBehaviour
         if (livesRemaining > 0)
         {
             StartCoroutine(RestartAfterDelay());
+            return;
         }
-        else
-        {
-            StartCoroutine(GameOverAfterDelay());
-        }
+
+        bool canOfferContinue = continuePanel != null
+            && AdsManager.Instance != null
+            && AdsManager.Instance.IsRewardedAdReady;
+
+        StartCoroutine(canOfferContinue ? ShowContinuePanelAfterDelay() : GameOverAfterDelay());
     }
 
     private IEnumerator RestartAfterDelay()
     {
         yield return new WaitForSeconds(deathRestartDelay);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    private IEnumerator ShowContinuePanelAfterDelay()
+    {
+        yield return new WaitForSeconds(deathRestartDelay);
+        continuePanel.SetActive(true);
+        Time.timeScale = 0f;
+    }
+
+    /// <summary>Wired to the continue panel's "Watch Ad" button. Only grants the extra life
+    /// once AdsManager's own callback confirms the ad was actually watched through - see
+    /// AdsManager.ShowRewardedAd.</summary>
+    public void WatchAdForExtraLife()
+    {
+        if (AdsManager.Instance == null)
+        {
+            DeclineContinue();
+            return;
+        }
+
+        AdsManager.Instance.ShowRewardedAd(() =>
+        {
+            livesRemaining = 1;
+            UpdateLivesUI();
+            if (continuePanel != null) continuePanel.SetActive(false);
+            Time.timeScale = 1f;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        });
+    }
+
+    /// <summary>Wired to the continue panel's "No Thanks" button - proceeds to the normal
+    /// game-over flow instead.</summary>
+    public void DeclineContinue()
+    {
+        if (continuePanel != null) continuePanel.SetActive(false);
+        Time.timeScale = 1f;
+        StartCoroutine(GameOverAfterDelay());
     }
 
     private IEnumerator GameOverAfterDelay()
@@ -216,6 +270,11 @@ public class GameManager : MonoBehaviour
         if (levelNumber.HasValue)
         {
             LevelProgress.MarkCompleted(levelNumber.Value);
+        }
+
+        if (AdsManager.Instance != null)
+        {
+            AdsManager.Instance.NotifyLevelCompleted();
         }
 
         if (!string.IsNullOrEmpty(nextSceneName))
