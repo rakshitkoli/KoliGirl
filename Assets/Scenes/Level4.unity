@@ -41242,7 +41242,6 @@ Transform:
   - {fileID: 1250291661}
   - {fileID: 410997082}
   - {fileID: 1216104930}
-  - {fileID: 2123881872}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &828415436
@@ -69536,7 +69535,7 @@ Transform:
   m_GameObject: {fileID: 1436830133}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 30, y: -5.4604044, z: 1.22}
+  m_LocalPosition: {x: 24, y: -5.4604044, z: 1.22}
   m_LocalScale: {x: 0.55, y: 0.55, z: 0.55}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -94144,76 +94143,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
---- !u!1001 &2123881871
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 824970984}
-    m_Modifications:
-    - target: {fileID: 1409612281, guid: 87d5300c90a24d4585939974826f5311, type: 3}
-      propertyPath: m_Name
-      value: Crab Enemy (4)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1409612282, guid: 87d5300c90a24d4585939974826f5311, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 48
-      objectReference: {fileID: 0}
-    - target: {fileID: 1409612282, guid: 87d5300c90a24d4585939974826f5311, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -5.612213
-      objectReference: {fileID: 0}
-    - target: {fileID: 1409612282, guid: 87d5300c90a24d4585939974826f5311, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1409612282, guid: 87d5300c90a24d4585939974826f5311, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1409612282, guid: 87d5300c90a24d4585939974826f5311, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1409612282, guid: 87d5300c90a24d4585939974826f5311, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1409612282, guid: 87d5300c90a24d4585939974826f5311, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1409612282, guid: 87d5300c90a24d4585939974826f5311, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1409612282, guid: 87d5300c90a24d4585939974826f5311, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1409612282, guid: 87d5300c90a24d4585939974826f5311, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1409612283, guid: 87d5300c90a24d4585939974826f5311, type: 3}
-      propertyPath: speed
-      value: 2.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1409612283, guid: 87d5300c90a24d4585939974826f5311, type: 3}
-      propertyPath: patrolDistance
-      value: 4
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 87d5300c90a24d4585939974826f5311, type: 3}
---- !u!4 &2123881872 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1409612282, guid: 87d5300c90a24d4585939974826f5311, type: 3}
-  m_PrefabInstance: {fileID: 2123881871}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2127986977
 GameObject:
   m_ObjectHideFlags: 0

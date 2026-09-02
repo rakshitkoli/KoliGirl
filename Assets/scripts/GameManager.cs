@@ -30,6 +30,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int livesPerLevel = 3;
     [SerializeField] private TMP_Text livesText;
 
+    [Header("Checkpoint")]
+    [Tooltip("How long (seconds) the player is immune to hazards right after respawning at a " +
+        "checkpoint - gives them a beat to move before an enemy that happens to be nearby can " +
+        "kill them again immediately.")]
+    [SerializeField] private float respawnInvulnerability = 1.5f;
+
     [Header("Level Progression")]
     [Tooltip("Scene to load when this level's exit is reached. Leave blank for the last " +
         "level in the game - CompleteLevel() then falls back to the pause + levelCompletePanel behavior.")]
@@ -119,6 +125,8 @@ public class GameManager : MonoBehaviour
             rb.position = checkpointPosition;
             rb.linearVelocity = Vector2.zero;
         }
+
+        player.GrantInvulnerability(respawnInvulnerability);
     }
 
     public void AddScore(int amount)
