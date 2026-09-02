@@ -144,6 +144,13 @@ public class GameManager : MonoBehaviour
         UpdateCoinsUI();
     }
 
+    /// <summary>Called by LifePickup when the player collects a rare extra-life item.</summary>
+    public void AddLife(int amount = 1)
+    {
+        livesRemaining += amount;
+        UpdateLivesUI();
+    }
+
     private void UpdateScoreUI()
     {
         if (scoreText != null)
