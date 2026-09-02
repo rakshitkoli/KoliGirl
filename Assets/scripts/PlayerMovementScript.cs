@@ -20,9 +20,12 @@ public class PlayerMovementScript : MonoBehaviour
     [Tooltip("Move.y is already bound to S/Down-arrow for both keyboard layouts, so ducking " +
         "reuses that input instead of needing a new action - hold down while grounded.")]
     [SerializeField] float duckInputThreshold = -0.5f;
-    [Tooltip("Fraction of the standing collider height used while ducking (and the sprite's " +
-        "vertical squash) - shrinks the hitbox down and in from the top so overhead hazards " +
-        "that would otherwise clip the player can be ducked under.")]
+    [Tooltip("Fraction of the standing collider height used while ducking - shrinks the hitbox " +
+        "down and in from the top so overhead hazards that would otherwise clip the player can " +
+        "be ducked under. Purely a gameplay hitbox change now - the visual crouch is a real " +
+        "Animator state (Duck.anim, isDucking bool) driven from HandleDuck below, not a sprite " +
+        "squash: an earlier squash-scale approach shrank toward the rig's pivot (not the feet), " +
+        "which just looked like the character getting smaller instead of crouching.")]
     [SerializeField] [Range(0.3f, 0.9f)] float duckHeightScale = 0.55f;
 
     public ParticleSystem dust;
@@ -53,7 +56,6 @@ public class PlayerMovementScript : MonoBehaviour
     float facingSign = 1f;
     float standingColliderHeight;
     float standingColliderOffsetY;
-    float standingWorldBottomY;
 
     void Start()
      {
@@ -69,10 +71,6 @@ public class PlayerMovementScript : MonoBehaviour
         baseScaleMagnitude = Mathf.Abs(transform.localScale.x);
         standingColliderHeight = myCapsuleCollider.size.y;
         standingColliderOffsetY = myCapsuleCollider.offset.y;
-        // World-space Y of the collider's bottom edge while standing (feet position) - HandleDuck
-        // solves back from this so the feet stay planted no matter what scale is in effect,
-        // instead of assuming the transform's scale never changes (it does - see FlipSprite).
-        standingWorldBottomY = (standingColliderOffsetY - standingColliderHeight * 0.5f) * baseScaleMagnitude;
         StopDust();
     }
 
@@ -199,31 +197,27 @@ public class PlayerMovementScript : MonoBehaviour
     }
 
     /// <summary>Reuses the existing Move.y axis (already bound to S/Down-arrow) rather than a
-    /// new input action - down while grounded shrinks the collider from the top and squashes
-    /// the sprite to match, so an overhead hazard that would otherwise clip the player can be
-    /// ducked under.</summary>
+    /// new input action - down while grounded shrinks the collider from the top (feet stay
+    /// planted) so an overhead hazard that would otherwise clip the player can be ducked under,
+    /// and drives the Animator's isDucking bool for the actual crouch pose.</summary>
     void HandleDuck(bool grounded)
     {
-        // Only re-check grounded to START ducking. Re-checking it every frame while already
-        // ducking used to fight the collider resize below: shrinking the collider changes the
-        // transform's scale too (see FlipSprite), and the offset math previously assumed that
-        // scale never changed - so the resized hitbox landed a hair above the ground, grounded
-        // read false a frame later, duck reverted, grounded read true again, duck re-triggered...
-        // every single frame. That loop was the "shaking". Gating only entry on grounded avoids
-        // re-running into it even if some other edge case nudges grounded false for a frame.
+        // Only re-check grounded to START ducking, not to keep ducking - see git history for
+        // why re-checking it every frame here is a bad idea (a collider-resize/grounded
+        // feedback loop that made the character shake in place).
         bool wantsDuck = IsDucking
             ? moveInput.y < duckInputThreshold
             : grounded && moveInput.y < duckInputThreshold;
         if (wantsDuck == IsDucking) return;
 
         IsDucking = wantsDuck;
-        float scaleY = baseScaleMagnitude * (IsDucking ? duckHeightScale : 1f);
-        float heightLocal = standingColliderHeight * (IsDucking ? duckHeightScale : 1f);
+        myAnimator.SetBool("isDucking", IsDucking);
 
-        myCapsuleCollider.size = new Vector2(myCapsuleCollider.size.x, heightLocal);
+        float duckedHeight = standingColliderHeight * (IsDucking ? duckHeightScale : 1f);
+        myCapsuleCollider.size = new Vector2(myCapsuleCollider.size.x, duckedHeight);
         myCapsuleCollider.offset = new Vector2(
             myCapsuleCollider.offset.x,
-            standingWorldBottomY / scaleY + heightLocal * 0.5f);
+            standingColliderOffsetY - (standingColliderHeight - duckedHeight) * 0.5f);
     }
 
     void FlipSprite()
@@ -234,8 +228,7 @@ public class PlayerMovementScript : MonoBehaviour
             facingSign = Mathf.Sign(myRigidbody.linearVelocity.x);
         }
 
-        float duckSquash = IsDucking ? duckHeightScale : 1f;
-        transform.localScale = new Vector3(facingSign * baseScaleMagnitude, baseScaleMagnitude * duckSquash, transform.localScale.z);
+        transform.localScale = new Vector3(facingSign * baseScaleMagnitude, baseScaleMagnitude, transform.localScale.z);
     }
 
     void CreateDust()
