@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9a3e373af5fd540b396b741b4bbb0375
+guid: ebc1cb9a79f6146cda3f7c26143cffb5
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Herculanum
+  - Copperplate
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
