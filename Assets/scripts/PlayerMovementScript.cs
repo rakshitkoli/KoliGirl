@@ -31,6 +31,23 @@ public class PlayerMovementScript : MonoBehaviour
         "full stop. Drives the Duck/DuckWalk Animator split via isRunning, same as standing.")]
     [SerializeField] [Range(0f, 1f)] float duckSpeedMultiplier = 0.5f;
 
+    [Header("Dash")]
+    [Tooltip("Reuses the existing \"Fire\" input action (Left Shift / Left-Click / Gamepad West " +
+        "button) - it had no gameplay use yet, so no new binding UI is needed. A short, fast " +
+        "horizontal burst in the direction the player is facing: crosses gaps, dodges harpoons/" +
+        "nets, and grants a brief invulnerability window (see GrantInvulnerability) so a " +
+        "well-timed dash can punch straight through a hazard instead of just outrunning it.")]
+    [SerializeField] float dashSpeed = 20f;
+    [SerializeField] float dashDuration = 0.16f;
+    [SerializeField] float dashCooldown = 0.9f;
+    [Tooltip("No bespoke dash animation/bone pose - the run cycle keeps playing (forced on for " +
+        "the burst) and a fading afterimage trail sells the speed instead. Cheaper than a new " +
+        "Animator state and avoids repeating the long duck-pose iteration cycle for a move whose " +
+        "whole point is being over almost instantly.")]
+    [SerializeField] [Range(2, 8)] int dashGhostCount = 5;
+    [SerializeField] Color dashGhostTint = new Color(1f, 0.85f, 0.5f, 0.55f);
+    [SerializeField] float dashGhostFadeTime = 0.25f;
+
     public ParticleSystem dust;
     public Vector2 moveInput;
     public Rigidbody2D myRigidbody;
@@ -52,7 +69,13 @@ public class PlayerMovementScript : MonoBehaviour
     float lastGroundedTime = -999f;
     int groundMask;
     float baseScaleMagnitude;
-    SpriteRenderer spriteRenderer;
+
+    // Koli Girl is a composite bone rig (Body/Face/Scarf/Basket/limbs etc., each its own
+    // SpriteRenderer under a bone) rather than one sprite - GetComponent<SpriteRenderer>() on
+    // this object finds only the root's own renderer, which the PSB import leaves disabled with
+    // no sprite assigned (unused). Both the invulnerability blink and the dash ghost trail need
+    // every visible part, not that empty one.
+    SpriteRenderer[] bodyPartRenderers;
     Coroutine invulnerabilityRoutine;
 
     public bool IsDucking { get; private set; }
@@ -60,13 +83,42 @@ public class PlayerMovementScript : MonoBehaviour
     float standingColliderHeight;
     float standingColliderOffsetY;
 
+    public bool IsDashing { get; private set; }
+    float dashCooldownTimer;
+    float dashDirection = 1f;
+
+    [Header("Net Snare")]
+    [Tooltip("Speed multiplier applied on top of the normal run speed while snared by a " +
+        "FishingNet - a crawl, not a full stop, so struggling out still feels like doing " +
+        "something.")]
+    [SerializeField] [Range(0f, 0.6f)] float netSnareSpeedMultiplier = 0.15f;
+    float netSnareTimer;
+
+    /// <summary>True while caught in a FishingNet (see ApplySnare). Blocks Jump and Dash the
+    /// same way IsDucking already does, so a snared player can't just skip past the penalty.</summary>
+    public bool IsSnared => netSnareTimer > 0f;
+
+    [Header("Wind")]
+    /// <summary>Set/cleared by WindGust while the player is inside its trigger. Applied in Run()
+    /// as a flat addition to the target x-velocity rather than through Rigidbody2D directly -
+    /// Run() already sets velocity.x fresh from moveInput every Update(), so anything added any
+    /// other way would just get overwritten the same frame.</summary>
+    float windPush;
+
     void Start()
      {
         myRigidbody = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
         myCapsuleCollider = GetComponent<CapsuleCollider2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
         groundMask = LayerMask.GetMask("Ground");
+
+        var allRenderers = GetComponentsInChildren<SpriteRenderer>(true);
+        var withSprite = new List<SpriteRenderer>(allRenderers.Length);
+        foreach (var r in allRenderers)
+        {
+            if (r.sprite != null) withSprite.Add(r);
+        }
+        bodyPartRenderers = withSprite.ToArray();
         // Cache once, at whatever scale this character was placed at - FlipSprite() below
         // only ever flips the sign, never overwrites the magnitude, so this works for any
         // character's own scale (not hardcoded to Koli Girl's 0.2) and can't drift even if
@@ -83,7 +135,22 @@ public class PlayerMovementScript : MonoBehaviour
 
         bool grounded = myCapsuleCollider.IsTouchingLayers(groundMask);
         HandleDuck(grounded);
-        Run();
+
+        if (dashCooldownTimer > 0f) dashCooldownTimer -= Time.deltaTime;
+        if (netSnareTimer > 0f) netSnareTimer -= Time.deltaTime;
+
+        if (IsDashing)
+        {
+            // Horizontal burst only - leaves whatever vertical velocity (falling, rising out of
+            // a jump) alone, so dash reads as "boost" rather than "float".
+            myRigidbody.linearVelocity = new Vector2(dashDirection * dashSpeed, myRigidbody.linearVelocity.y);
+            myAnimator.SetBool("isRunning", true);
+        }
+        else
+        {
+            Run();
+        }
+
         FlipSprite();
 
         if (grounded)
@@ -111,6 +178,7 @@ public class PlayerMovementScript : MonoBehaviour
     {
         if (IsDead) return;
         if (IsDucking) return;
+        if (IsSnared) return;
         if (!value.isPressed) return;
         if (jumpsRemaining <= 0) return;
 
@@ -120,6 +188,60 @@ public class PlayerMovementScript : MonoBehaviour
         jumpsRemaining--;
         myAnimator.SetTrigger("jump");
         StopDust();
+    }
+
+    void OnFire(InputValue value)
+    {
+        if (IsDead) return;
+        if (!value.isPressed) return;
+        TryDash();
+    }
+
+    void TryDash()
+    {
+        // Blocked while ducking (collider is already shrunk for an overhead hazard - a dash
+        // burst on top of that hitbox is more complexity than it's worth), while snared, and
+        // during cooldown.
+        if (IsDashing || IsDucking || IsSnared || dashCooldownTimer > 0f) return;
+
+        dashDirection = facingSign;
+        StartCoroutine(DashRoutine());
+    }
+
+    IEnumerator DashRoutine()
+    {
+        IsDashing = true;
+        dashCooldownTimer = dashCooldown;
+        // Slightly longer than the dash itself, so the very last frame of the burst (still
+        // technically overlapping whatever hazard the player just dashed through) is covered too.
+        GrantInvulnerability(dashDuration + 0.05f);
+
+        float elapsed = 0f;
+        float ghostInterval = dashDuration / dashGhostCount;
+        float sinceLastGhost = ghostInterval; // so the first ghost spawns immediately, not after one interval
+
+        while (elapsed < dashDuration)
+        {
+            sinceLastGhost += Time.deltaTime;
+            if (sinceLastGhost >= ghostInterval)
+            {
+                SpawnGhost();
+                sinceLastGhost = 0f;
+            }
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        IsDashing = false;
+    }
+
+    void SpawnGhost()
+    {
+        if (bodyPartRenderers == null || bodyPartRenderers.Length == 0) return;
+
+        var ghostObj = new GameObject("DashGhost");
+        var ghost = ghostObj.AddComponent<DashGhostFade>();
+        ghost.Init(bodyPartRenderers, dashGhostTint, dashGhostFadeTime);
     }
 
     /// <summary>Called by Hazard on contact (Fire, Spikes, ...). Stops control and plays
@@ -156,16 +278,27 @@ public class PlayerMovementScript : MonoBehaviour
     {
         IsInvulnerable = true;
         float elapsed = 0f;
+        bool visible = true;
         while (elapsed < duration)
         {
-            if (spriteRenderer != null) spriteRenderer.enabled = !spriteRenderer.enabled;
+            visible = !visible;
+            SetBodyVisible(visible);
             yield return new WaitForSeconds(invulnerabilityBlinkInterval);
             elapsed += invulnerabilityBlinkInterval;
         }
 
-        if (spriteRenderer != null) spriteRenderer.enabled = true;
+        SetBodyVisible(true);
         IsInvulnerable = false;
         invulnerabilityRoutine = null;
+    }
+
+    void SetBodyVisible(bool visible)
+    {
+        if (bodyPartRenderers == null) return;
+        foreach (var r in bodyPartRenderers)
+        {
+            if (r != null) r.enabled = visible;
+        }
     }
 
     /// <summary>True while actually moving horizontally, regardless of whether the player is
@@ -179,10 +312,12 @@ public class PlayerMovementScript : MonoBehaviour
     void Run()
     {
         // Ducking slows movement rather than freezing it, so the hitbox stays shrunk (still
-        // dodging an overhead hazard) while duck-walking underneath it.
+        // dodging an overhead hazard) while duck-walking underneath it. A net snare stacks with
+        // duck (crawling exists mostly so struggling still feels like doing *something*).
         float speedMultiplier = IsDucking ? duckSpeedMultiplier : 1f;
+        if (IsSnared) speedMultiplier *= netSnareSpeedMultiplier;
         float x = moveInput.x * speedMultiplier;
-        Vector2 playerVelocity = new Vector2(x * runSpeed, myRigidbody.linearVelocity.y);
+        Vector2 playerVelocity = new Vector2(x * runSpeed + windPush, myRigidbody.linearVelocity.y);
         myRigidbody.linearVelocity = playerVelocity;
         bool playerHasHorizontalSpeed = Mathf.Abs(myRigidbody.linearVelocity.x) > Mathf.Epsilon;
 
@@ -233,6 +368,21 @@ public class PlayerMovementScript : MonoBehaviour
         }
 
         transform.localScale = new Vector3(facingSign * baseScaleMagnitude, baseScaleMagnitude, transform.localScale.z);
+    }
+
+    /// <summary>Called by FishingNet on contact. Refreshes (doesn't stack) the snare timer, so
+    /// lingering in a net doesn't extend the penalty past snareDuration.</summary>
+    public void ApplySnare(float duration)
+    {
+        netSnareTimer = Mathf.Max(netSnareTimer, duration);
+    }
+
+    /// <summary>Called by WindGust every physics step the player is inside its trigger (0 on
+    /// exit). See the windPush field comment for why this goes through Run() instead of touching
+    /// Rigidbody2D directly.</summary>
+    public void SetWindPush(float push)
+    {
+        windPush = push;
     }
 
     void CreateDust()
