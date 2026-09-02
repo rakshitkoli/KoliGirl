@@ -26,7 +26,7 @@ public class PlayerMovementScript : MonoBehaviour
         "Animator state (Duck.anim, isDucking bool) driven from HandleDuck below, not a sprite " +
         "squash: an earlier squash-scale approach shrank toward the rig's pivot (not the feet), " +
         "which just looked like the character getting smaller instead of crouching.")]
-    [SerializeField] [Range(0.3f, 0.9f)] float duckHeightScale = 0.55f;
+    [SerializeField] [Range(0.3f, 0.9f)] float duckHeightScale = 0.35f;
     [Tooltip("Horizontal speed while ducking, as a fraction of runSpeed - a duck-walk, not a " +
         "full stop. Drives the Duck/DuckWalk Animator split via isRunning, same as standing.")]
     [SerializeField] [Range(0f, 1f)] float duckSpeedMultiplier = 0.5f;
