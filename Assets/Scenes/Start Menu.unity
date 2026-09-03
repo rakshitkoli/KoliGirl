@@ -8465,7 +8465,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7002e9fed9fee448fab133576446cc5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AdsManager
-  useTestAdUnits: 1
+  useTestAdUnits: 0
   rewardedAdUnitId: ca-app-pub-4363065684282456/1574251717
   interstitialAdUnitId: ca-app-pub-4363065684282456/9700153745
   levelsPerInterstitial: 4
