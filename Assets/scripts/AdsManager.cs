@@ -36,9 +36,21 @@ public class AdsManager : MonoBehaviour
         "frequent interstitials both risk an AdMob policy violation and tank retention.")]
     [SerializeField] private int levelsPerInterstitial = 4;
 
+    [Tooltip("Retry a failed ad load with backoff instead of giving up for the rest of the " +
+        "session. On a brand-new install, Google Play Services' Ads module commonly fails its " +
+        "very first \"app settings\" fetch and every ad request that session errors out with a " +
+        "generic network error even though the device's internet is completely fine - confirmed " +
+        "via device logcat: the SAME device loads ads successfully on the very next app launch. " +
+        "Without a retry, every real player's first-ever session would silently never see the " +
+        "Watch Ad button.")]
+    [SerializeField] private int maxLoadRetries = 5;
+    [SerializeField] private float retryBaseDelaySeconds = 2f;
+
     private RewardedAd rewardedAd;
     private InterstitialAd interstitialAd;
     private int levelsSinceLastInterstitial;
+    private int rewardedRetryCount;
+    private int interstitialRetryCount;
 
     private string ActiveRewardedAdUnitId => useTestAdUnits ? TestRewardedAdUnitId : rewardedAdUnitId;
     private string ActiveInterstitialAdUnitId => useTestAdUnits ? TestInterstitialAdUnitId : interstitialAdUnitId;
@@ -117,11 +129,36 @@ public class AdsManager : MonoBehaviour
             if (error != null || ad == null)
             {
                 Debug.LogWarning("AdsManager: Rewarded ad failed to load: " + error);
+                RetryLoad(ref rewardedRetryCount, LoadRewardedAd, "Rewarded");
                 return;
             }
             Debug.Log("AdsManager: Rewarded ad loaded successfully.");
+            rewardedRetryCount = 0;
             rewardedAd = ad;
         });
+    }
+
+    /// <summary>Shared retry-with-backoff for a failed load - see maxLoadRetries' tooltip for why
+    /// this exists (a brand-new install's first ad request commonly fails once through no fault
+    /// of the network or this app's config, per device logcat).</summary>
+    private void RetryLoad(ref int retryCount, Action loadAgain, string label)
+    {
+        if (!gameObject.activeInHierarchy) return; // don't schedule work past teardown
+        if (retryCount >= maxLoadRetries)
+        {
+            Debug.LogWarning("AdsManager: " + label + " gave up after " + retryCount + " retries.");
+            return;
+        }
+        retryCount++;
+        float delay = retryBaseDelaySeconds * retryCount; // simple linear backoff: 2s, 4s, 6s...
+        Debug.Log("AdsManager: retrying " + label + " load in " + delay + "s (attempt " + retryCount + "/" + maxLoadRetries + ")");
+        StartCoroutine(RetryAfterDelay(delay, loadAgain));
+    }
+
+    private System.Collections.IEnumerator RetryAfterDelay(float delay, Action loadAgain)
+    {
+        yield return new WaitForSeconds(delay);
+        loadAgain();
     }
 
     /// <summary>Called by GameManager.CompleteLevel - counts toward the next interstitial
@@ -172,9 +209,11 @@ public class AdsManager : MonoBehaviour
             if (error != null || ad == null)
             {
                 Debug.LogWarning("AdsManager: Interstitial failed to load: " + error);
+                RetryLoad(ref interstitialRetryCount, LoadInterstitialAd, "Interstitial");
                 return;
             }
             Debug.Log("AdsManager: Interstitial loaded successfully.");
+            interstitialRetryCount = 0;
             interstitialAd = ad;
         });
     }
