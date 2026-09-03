@@ -295,7 +295,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.6409
+  m_Radius: 0.46
 --- !u!212 &44263322
 SpriteRenderer:
   serializedVersion: 3
@@ -8319,7 +8319,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.6409
+  m_Radius: 0.46
 --- !u!212 &394032433
 SpriteRenderer:
   serializedVersion: 3
@@ -50175,7 +50175,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.6409
+  m_Radius: 0.46
 --- !u!212 &1403591191
 SpriteRenderer:
   serializedVersion: 3
