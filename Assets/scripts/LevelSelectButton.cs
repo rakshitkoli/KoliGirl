@@ -7,6 +7,8 @@ using UnityEngine.UI;
 /// is playable yet, dims + disables it if not, and shows a checkmark badge if it's already
 /// been completed. Clicking it (only possible when unlocked) loads "Level{levelNumber}".
 ///
+/// The lock icon is reserved for the Act 2 paywall only - a level that's simply not reached
+/// yet by progress (levels 1-10, or an unfinished 11-20 level after purchase) just dims instead.
 /// Levels 11+ ("Act 2") reuse the same lock icon, but with a twist: if the reason it's locked
 /// is "not purchased" rather than "haven't finished the previous level", the button stays
 /// tappable and a tap opens the purchase confirmation popup (see PurchasePromptUI) instead of
@@ -57,7 +59,8 @@ public class LevelSelectButton : MonoBehaviour
         button.interactable = unlocked || needsPurchase;
         canvasGroup.alpha = unlocked ? 1f : lockedAlpha;
 
-        if (lockIcon != null) lockIcon.SetActive(!unlocked);
+        // Only the paywall shows a padlock - a plain not-completed-yet level is just dimmed.
+        if (lockIcon != null) lockIcon.SetActive(needsPurchase);
         if (completeCheckmark != null) completeCheckmark.SetActive(unlocked && completed);
     }
 
