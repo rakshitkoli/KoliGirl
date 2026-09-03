@@ -17,8 +17,20 @@ public class AdsManager : MonoBehaviour
 {
     public static AdsManager Instance { get; private set; }
 
+    [Tooltip("Google's own test ad units - always fill instantly, so the continue/interstitial " +
+        "flow can actually be verified on a device. Watching your OWN real ad units repeatedly " +
+        "during development also risks an AdMob \"invalid traffic\" policy flag, on top of a " +
+        "brand-new/unapproved app often having low or zero real fill anyway. Switch this off only " +
+        "once you're deliberately testing with the real ad units before a store release.")]
+    [SerializeField] private bool useTestAdUnits = true;
+
     [SerializeField] private string rewardedAdUnitId = "ca-app-pub-4363065684282456/1574251717";
     [SerializeField] private string interstitialAdUnitId = "ca-app-pub-4363065684282456/9700153745";
+
+    // Google's official sample ad units (https://developers.google.com/admob/android/test-ads) -
+    // safe to hardcode, documented specifically for this purpose.
+    private const string TestRewardedAdUnitId = "ca-app-pub-3940256099942544/5224354917";
+    private const string TestInterstitialAdUnitId = "ca-app-pub-3940256099942544/1033173712";
 
     [Tooltip("Show an interstitial after this many level completions rather than every one - " +
         "frequent interstitials both risk an AdMob policy violation and tank retention.")]
@@ -27,6 +39,9 @@ public class AdsManager : MonoBehaviour
     private RewardedAd rewardedAd;
     private InterstitialAd interstitialAd;
     private int levelsSinceLastInterstitial;
+
+    private string ActiveRewardedAdUnitId => useTestAdUnits ? TestRewardedAdUnitId : rewardedAdUnitId;
+    private string ActiveInterstitialAdUnitId => useTestAdUnits ? TestInterstitialAdUnitId : interstitialAdUnitId;
 
     private void Awake()
     {
@@ -75,7 +90,7 @@ public class AdsManager : MonoBehaviour
     private void LoadRewardedAd()
     {
         var request = new AdRequest();
-        RewardedAd.Load(rewardedAdUnitId, request, (ad, error) =>
+        RewardedAd.Load(ActiveRewardedAdUnitId, request, (ad, error) =>
         {
             if (error != null || ad == null)
             {
@@ -118,7 +133,7 @@ public class AdsManager : MonoBehaviour
     private void LoadInterstitialAd()
     {
         var request = new AdRequest();
-        InterstitialAd.Load(interstitialAdUnitId, request, (ad, error) =>
+        InterstitialAd.Load(ActiveInterstitialAdUnitId, request, (ad, error) =>
         {
             if (error != null || ad == null)
             {
