@@ -9,8 +9,8 @@ using UnityEngine.UI;
 ///
 /// Levels 11+ ("Act 2") reuse the same lock icon, but with a twist: if the reason it's locked
 /// is "not purchased" rather than "haven't finished the previous level", the button stays
-/// tappable and a tap starts the Act 2 purchase (see IAPManager.BuyAct2) instead of doing
-/// nothing - no separate "Buy" UI needed.
+/// tappable and a tap opens the purchase confirmation popup (see PurchasePromptUI) instead of
+/// doing nothing - no separate "Buy" UI needed.
 /// </summary>
 [RequireComponent(typeof(Button))]
 public class LevelSelectButton : MonoBehaviour
@@ -69,7 +69,14 @@ public class LevelSelectButton : MonoBehaviour
             return;
         }
 
-        if (needsPurchase && IAPManager.Instance != null)
+        if (!needsPurchase) return;
+
+        // Ask first - don't drop the player straight into Google Play's payment sheet.
+        if (PurchasePromptUI.Instance != null)
+        {
+            PurchasePromptUI.Instance.Show();
+        }
+        else if (IAPManager.Instance != null)
         {
             IAPManager.Instance.BuyAct2();
         }
