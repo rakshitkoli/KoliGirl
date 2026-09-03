@@ -105,3 +105,6 @@ mono_crash.mem.*.blob
 # Debug/dev screenshots captured via MCP tooling, not real project assets
 /[Aa]ssets/[Ss]creenshots/
 /[Aa]ssets/[Ss]creenshots.meta
+
+# Android native build temp output (CMake/NDK toolchain scratch dir)
+.utmp/
