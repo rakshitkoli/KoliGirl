@@ -54,8 +54,18 @@ public class AdsManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
+        Debug.Log("AdsManager: calling MobileAds.Initialize...");
         MobileAds.Initialize(status =>
         {
+            // Log each adapter's own init state (e.g. "Google Mobile Ads SDK") - if this callback
+            // never fires at all on device, that itself is the finding (network/Play Services
+            // issue on that device); if it fires but an adapter reports NOT_READY, the message
+            // says why.
+            foreach (var kv in status.getAdapterStatusMap())
+            {
+                Debug.Log("AdsManager: adapter '" + kv.Key + "' state=" + kv.Value.InitializationState
+                    + " latency=" + kv.Value.Latency + "ms desc=" + kv.Value.Description);
+            }
             LoadRewardedAd();
             LoadInterstitialAd();
         });
@@ -73,12 +83,23 @@ public class AdsManager : MonoBehaviour
     {
         if (rewardedAd == null || !rewardedAd.CanShowAd())
         {
+            Debug.LogWarning("AdsManager: ShowRewardedAd called but no ad is ready (rewardedAd is "
+                + (rewardedAd == null ? "null" : "non-null but CanShowAd()==false") + ") - re-requesting a load.");
             LoadRewardedAd();
             return;
         }
 
         rewardedAd.OnAdFullScreenContentClosed += HandleRewardedClosed;
+        rewardedAd.OnAdFullScreenContentFailed += HandleRewardedShowFailed;
         rewardedAd.Show((Reward reward) => { onRewardEarned?.Invoke(); });
+    }
+
+    private void HandleRewardedShowFailed(AdError error)
+    {
+        Debug.LogWarning("AdsManager: Rewarded ad FAILED to show: " + error);
+        rewardedAd.OnAdFullScreenContentClosed -= HandleRewardedClosed;
+        rewardedAd.OnAdFullScreenContentFailed -= HandleRewardedShowFailed;
+        LoadRewardedAd();
     }
 
     private void HandleRewardedClosed()
@@ -89,14 +110,16 @@ public class AdsManager : MonoBehaviour
 
     private void LoadRewardedAd()
     {
+        Debug.Log("AdsManager: requesting Rewarded ad, unit=" + ActiveRewardedAdUnitId);
         var request = new AdRequest();
         RewardedAd.Load(ActiveRewardedAdUnitId, request, (ad, error) =>
         {
             if (error != null || ad == null)
             {
-                Debug.LogWarning("Rewarded ad failed to load: " + error);
+                Debug.LogWarning("AdsManager: Rewarded ad failed to load: " + error);
                 return;
             }
+            Debug.Log("AdsManager: Rewarded ad loaded successfully.");
             rewardedAd = ad;
         });
     }
@@ -116,12 +139,22 @@ public class AdsManager : MonoBehaviour
     {
         if (interstitialAd == null || !interstitialAd.CanShowAd())
         {
+            Debug.LogWarning("AdsManager: ShowInterstitial called but no ad is ready - re-requesting a load.");
             LoadInterstitialAd();
             return;
         }
 
         interstitialAd.OnAdFullScreenContentClosed += HandleInterstitialClosed;
+        interstitialAd.OnAdFullScreenContentFailed += HandleInterstitialShowFailed;
         interstitialAd.Show();
+    }
+
+    private void HandleInterstitialShowFailed(AdError error)
+    {
+        Debug.LogWarning("AdsManager: Interstitial FAILED to show: " + error);
+        interstitialAd.OnAdFullScreenContentClosed -= HandleInterstitialClosed;
+        interstitialAd.OnAdFullScreenContentFailed -= HandleInterstitialShowFailed;
+        LoadInterstitialAd();
     }
 
     private void HandleInterstitialClosed()
@@ -132,14 +165,16 @@ public class AdsManager : MonoBehaviour
 
     private void LoadInterstitialAd()
     {
+        Debug.Log("AdsManager: requesting Interstitial ad, unit=" + ActiveInterstitialAdUnitId);
         var request = new AdRequest();
         InterstitialAd.Load(ActiveInterstitialAdUnitId, request, (ad, error) =>
         {
             if (error != null || ad == null)
             {
-                Debug.LogWarning("Interstitial failed to load: " + error);
+                Debug.LogWarning("AdsManager: Interstitial failed to load: " + error);
                 return;
             }
+            Debug.Log("AdsManager: Interstitial loaded successfully.");
             interstitialAd = ad;
         });
     }
