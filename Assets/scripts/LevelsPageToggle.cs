@@ -14,6 +14,12 @@ public class LevelsPageToggle : MonoBehaviour
     [SerializeField] private GameObject page2;
     [SerializeField] private TMPro.TMP_Text label;
 
+    /// <summary>Set by GameManager right before loading this scene when Level10 finishes but
+    /// Act 2 isn't purchased yet, so the player lands straight on the page showing Level11
+    /// locked-for-purchase instead of having to find the toggle themselves. Consumed (reset to
+    /// false) on read so it only affects the very next time this scene loads.</summary>
+    public static bool OpenOnPage2Next;
+
     private bool onPage2;
 
     private void Awake()
@@ -23,6 +29,11 @@ public class LevelsPageToggle : MonoBehaviour
 
     private void Start()
     {
+        if (OpenOnPage2Next)
+        {
+            onPage2 = true;
+            OpenOnPage2Next = false;
+        }
         Apply();
     }
 

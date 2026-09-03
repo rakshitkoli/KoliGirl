@@ -6,6 +6,11 @@ using UnityEngine.UI;
 /// One button on the Levels page. Reads LevelProgress on enable to decide whether this level
 /// is playable yet, dims + disables it if not, and shows a checkmark badge if it's already
 /// been completed. Clicking it (only possible when unlocked) loads "Level{levelNumber}".
+///
+/// Levels 11+ ("Act 2") reuse the same lock icon, but with a twist: if the reason it's locked
+/// is "not purchased" rather than "haven't finished the previous level", the button stays
+/// tappable and a tap starts the Act 2 purchase (see IAPManager.BuyAct2) instead of doing
+/// nothing - no separate "Buy" UI needed.
 /// </summary>
 [RequireComponent(typeof(Button))]
 public class LevelSelectButton : MonoBehaviour
@@ -17,6 +22,7 @@ public class LevelSelectButton : MonoBehaviour
 
     private Button button;
     private CanvasGroup canvasGroup;
+    private bool needsPurchase;
 
     private void Awake()
     {
@@ -29,6 +35,12 @@ public class LevelSelectButton : MonoBehaviour
     private void OnEnable()
     {
         Refresh();
+        LevelProgress.OnAct2PurchaseChanged += Refresh;
+    }
+
+    private void OnDisable()
+    {
+        LevelProgress.OnAct2PurchaseChanged -= Refresh;
     }
 
     private void Refresh()
@@ -36,7 +48,13 @@ public class LevelSelectButton : MonoBehaviour
         bool unlocked = LevelProgress.IsUnlocked(levelNumber);
         bool completed = LevelProgress.IsCompleted(levelNumber);
 
-        button.interactable = unlocked;
+        // Distinct from "locked, do nothing": this level's only blocker is the Act 2 purchase,
+        // so tapping it (still dimmed, same lock icon) should offer to buy instead of sitting dead.
+        needsPurchase = !unlocked
+            && levelNumber >= LevelProgress.Act2FirstLevel
+            && !LevelProgress.IsAct2Purchased();
+
+        button.interactable = unlocked || needsPurchase;
         canvasGroup.alpha = unlocked ? 1f : lockedAlpha;
 
         if (lockIcon != null) lockIcon.SetActive(!unlocked);
@@ -45,7 +63,15 @@ public class LevelSelectButton : MonoBehaviour
 
     private void OnClick()
     {
-        if (!LevelProgress.IsUnlocked(levelNumber)) return;
-        SceneManager.LoadScene("Level" + levelNumber);
+        if (LevelProgress.IsUnlocked(levelNumber))
+        {
+            SceneManager.LoadScene("Level" + levelNumber);
+            return;
+        }
+
+        if (needsPurchase && IAPManager.Instance != null)
+        {
+            IAPManager.Instance.BuyAct2();
+        }
     }
 }
