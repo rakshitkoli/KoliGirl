@@ -14,7 +14,17 @@ using UnityEngine;
 /// no projection mismatch between this layer and anything else in the scene - unlike a
 /// perspective-camera-based parallax rig, nothing here can drift out of alignment with
 /// foreground objects (trees, platforms, etc).
+///
+/// NOTE: RunZoomCamera overrides the real Camera's position AFTER CinemachineBrain via
+/// [DefaultExecutionOrder(1000)], because Cinemachine's own output can't be trusted here (see
+/// that script's notes). If this script ran at Unity's default order, its LateUpdate could read
+/// the camera's position BEFORE that override lands, computing delta.x against a stale/raw
+/// value that differs from what's actually rendered - causing drift to accumulate incorrectly
+/// over time (observed as backgrounds running out of coverage far earlier than their width
+/// should allow). Running after RunZoomCamera guarantees this always reads the same final
+/// camera position the frame actually renders.
 /// </summary>
+[DefaultExecutionOrder(1100)]
 public class ParallaxLayer : MonoBehaviour
 {
     [SerializeField] private Transform cam;

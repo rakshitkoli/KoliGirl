@@ -1,0 +1,1040 @@
+fileFormatVersion: 2
+guid: 20bc7f9feac3f4aa5a57c534d02b6537
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 1962821283680145787
+    second: LClouds2.orig_0
+  - first:
+      213: -3796399198882309031
+    second: LClouds2.orig_1
+  - first:
+      213: 5378172409229740902
+    second: LClouds2.orig_2
+  - first:
+      213: 8027857214760090316
+    second: LClouds2.orig_3
+  - first:
+      213: 1224656248417625547
+    second: LClouds2.orig_4
+  - first:
+      213: -7781511100010157152
+    second: LClouds2.orig_5
+  - first:
+      213: -6451873472443525466
+    second: LClouds2.orig_6
+  - first:
+      213: 2962993059566247379
+    second: LClouds2.orig_7
+  - first:
+      213: 99634758146059636
+    second: LClouds2.orig_8
+  - first:
+      213: -4533994851374649844
+    second: LClouds2.orig_9
+  - first:
+      213: 2493528284007740858
+    second: LClouds2.orig_10
+  - first:
+      213: 9161223195226240899
+    second: LClouds2.orig_11
+  - first:
+      213: 4638453323415638435
+    second: LClouds2.orig_12
+  - first:
+      213: -3651471369585728318
+    second: LClouds2.orig_13
+  - first:
+      213: 9124529639265944184
+    second: LClouds2.orig_14
+  - first:
+      213: -919441780077006275
+    second: LClouds2.orig_15
+  - first:
+      213: 580381945943416824
+    second: LClouds2.orig_16
+  - first:
+      213: -663817058534007863
+    second: LClouds2.orig_17
+  - first:
+      213: -2574563454486165237
+    second: LClouds2.orig_18
+  - first:
+      213: -6252602728757124610
+    second: LClouds2.orig_19
+  - first:
+      213: 6644568654994736625
+    second: LClouds2.orig_20
+  - first:
+      213: -3583754581267882929
+    second: LClouds2.orig_21
+  - first:
+      213: 6924330172327831288
+    second: LClouds2.orig_22
+  - first:
+      213: 8978990664864138429
+    second: LClouds2.orig_23
+  - first:
+      213: -3723933625520838630
+    second: LClouds2.orig_24
+  - first:
+      213: -4026041420246360281
+    second: LClouds2.orig_25
+  - first:
+      213: -3978425563813242904
+    second: LClouds2.orig_26
+  - first:
+      213: -3874051984220043588
+    second: LClouds2.orig_27
+  - first:
+      213: -8288078580476217679
+    second: LClouds2.orig_28
+  - first:
+      213: -7500150097588217718
+    second: LClouds2.orig_29
+  - first:
+      213: 8072362168689019998
+    second: LClouds2.orig_30
+  - first:
+      213: 1684886898352108138
+    second: LClouds2.orig_31
+  - first:
+      213: 3821770170390784152
+    second: LClouds2.orig_32
+  - first:
+      213: -8732864425134482573
+    second: LClouds2.orig_33
+  - first:
+      213: -704035896505154563
+    second: LClouds2.orig_34
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: LClouds2.orig_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1584
+        height: 672
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b71d45bde875d3b10800000000000000
+      internalID: 1962821283680145787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LClouds2.orig_1
+      rect:
+        serializedVersion: 2
+        x: 2227
+        y: 87
+        width: 1271
+        height: 585
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95cda05fa0b705bc0800000000000000
+      internalID: -3796399198882309031
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LClouds2.orig_2
+      rect:
+        serializedVersion: 2
+        x: 3427
+        y: 566
+        width: 361
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 66b02f8bf4b13aa40800000000000000
+      internalID: 5378172409229740902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LClouds2.orig_3
+      rect:
+        serializedVersion: 2
+        x: 3967
+        y: 585
+        width: 209
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ccaf4597a9da86f60800000000000000
+      internalID: 8027857214760090316
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LClouds2.orig_4
+      rect:
+        serializedVersion: 2
+        x: 4217
+        y: 529
+        width: 359
+        height: 143
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc525e29e5adef010800000000000000
+      internalID: 1224656248417625547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LClouds2.orig_5
+      rect:
+        serializedVersion: 2
+        x: 4644
+        y: 604
+        width: 68
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0aba22cf1e4820490800000000000000
+      internalID: -7781511100010157152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LClouds2.orig_6
+      rect:
+        serializedVersion: 2
+        x: 4601
+        y: 579
+        width: 27
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a6dc33a2475676a0800000000000000
+      internalID: -6451873472443525466
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LClouds2.orig_7
+      rect:
+        serializedVersion: 2
+        x: 3840
+        y: 534
+        width: 94
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ddd4633d7aae1920800000000000000
+      internalID: 2962993059566247379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LClouds2.orig_8
+      rect:
+        serializedVersion: 2
+        x: 4278
+        y: 418
+        width: 277
+        height: 143
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 47de39ed849f16100800000000000000
+      internalID: 99634758146059636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LClouds2.orig_9
+      rect:
+        serializedVersion: 2
+        x: 3497
+        y: 452
+        width: 319
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0e2d5e64b30411c0800000000000000
+      internalID: -4533994851374649844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LClouds2.orig_10
+      rect:
+        serializedVersion: 2
+        x: 4045
+        y: 449
+        width: 68
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab5bba553caca9220800000000000000
+      internalID: 2493528284007740858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LClouds2.orig_11
+      rect:
+        serializedVersion: 2
+        x: 4135
+        y: 488
+        width: 52
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 387778335f3332f70800000000000000
+      internalID: 9161223195226240899
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LClouds2.orig_12
+      rect:
+        serializedVersion: 2
+        x: 4426
+        y: 290
+        width: 286
+        height: 208
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a15b69d8b81f5040800000000000000
+      internalID: 4638453323415638435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LClouds2.orig_13
+      rect:
+        serializedVersion: 2
+        x: 3840
+        y: 320
+        width: 328
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c4655cb22e535dc0800000000000000
+      internalID: -3651471369585728318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LClouds2.orig_14
+      rect:
+        serializedVersion: 2
+        x: 3959
+        y: 426
+        width: 34
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87248f2fc57d0ae70800000000000000
+      internalID: 9124529639265944184
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LClouds2.orig_15
+      rect:
+        serializedVersion: 2
+        x: 4153
+        y: 442
+        width: 9
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d327bda829c7d33f0800000000000000
+      internalID: -919441780077006275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LClouds2.orig_16
+      rect:
+        serializedVersion: 2
+        x: 4162
+        y: 444
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ffd10a0e4eed0800800000000000000
+      internalID: 580381945943416824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LClouds2.orig_17
+      rect:
+        serializedVersion: 2
+        x: 3532
+        y: 410
+        width: 91
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9cb5c3ef6e5a9c6f0800000000000000
+      internalID: -663817058534007863
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LClouds2.orig_18
+      rect:
+        serializedVersion: 2
+        x: 2125
+        y: 335
+        width: 21
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b0946a3cd20554cd0800000000000000
+      internalID: -2574563454486165237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LClouds2.orig_19
+      rect:
+        serializedVersion: 2
+        x: 2137
+        y: 329
+        width: 73
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef12bc622fa4a39a0800000000000000
+      internalID: -6252602728757124610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LClouds2.orig_20
+      rect:
+        serializedVersion: 2
+        x: 3540
+        y: 294
+        width: 311
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f508aebcff363c50800000000000000
+      internalID: 6644568654994736625
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LClouds2.orig_21
+      rect:
+        serializedVersion: 2
+        x: 4186
+        y: 226
+        width: 251
+        height: 145
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f4c59552232f34ec0800000000000000
+      internalID: -3583754581267882929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LClouds2.orig_22
+      rect:
+        serializedVersion: 2
+        x: 4505
+        y: 234
+        width: 207
+        height: 153
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8f6ae15ea99281060800000000000000
+      internalID: 6924330172327831288
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LClouds2.orig_23
+      rect:
+        serializedVersion: 2
+        x: 3463
+        y: 276
+        width: 41
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db486ccdf68cb9c70800000000000000
+      internalID: 8978990664864138429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LClouds2.orig_24
+      rect:
+        serializedVersion: 2
+        x: 3534
+        y: 301
+        width: 12
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a18a2bb091ee15cc0800000000000000
+      internalID: -3723933625520838630
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LClouds2.orig_25
+      rect:
+        serializedVersion: 2
+        x: 3348
+        y: 181
+        width: 334
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 72fd43fb8a0a028c0800000000000000
+      internalID: -4026041420246360281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LClouds2.orig_26
+      rect:
+        serializedVersion: 2
+        x: 4010
+        y: 101
+        width: 338
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e7149f370bc9c8c0800000000000000
+      internalID: -3978425563813242904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LClouds2.orig_27
+      rect:
+        serializedVersion: 2
+        x: 4507
+        y: 231
+        width: 14
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb6ca27fe3a9c3ac0800000000000000
+      internalID: -3874051984220043588
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LClouds2.orig_28
+      rect:
+        serializedVersion: 2
+        x: 2049
+        y: 153
+        width: 84
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b6f0347174dafc80800000000000000
+      internalID: -8288078580476217679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LClouds2.orig_29
+      rect:
+        serializedVersion: 2
+        x: 3399
+        y: 0
+        width: 574
+        height: 171
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a889427493d1ae790800000000000000
+      internalID: -7500150097588217718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LClouds2.orig_30
+      rect:
+        serializedVersion: 2
+        x: 4634
+        y: 153
+        width: 35
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5cc20b8f9ac60070800000000000000
+      internalID: 8072362168689019998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LClouds2.orig_31
+      rect:
+        serializedVersion: 2
+        x: 2526
+        y: 78
+        width: 30
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a62bcf605bbe16710800000000000000
+      internalID: 1684886898352108138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LClouds2.orig_32
+      rect:
+        serializedVersion: 2
+        x: 3353
+        y: 38
+        width: 106
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 898a35ba8b7a90530800000000000000
+      internalID: 3821770170390784152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LClouds2.orig_33
+      rect:
+        serializedVersion: 2
+        x: 4275
+        y: 34
+        width: 342
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 37b9634f212aec680800000000000000
+      internalID: -8732864425134482573
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LClouds2.orig_34
+      rect:
+        serializedVersion: 2
+        x: 4272
+        y: 36
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df3cfaf0513ca36f0800000000000000
+      internalID: -704035896505154563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      LClouds2.orig_0: 1962821283680145787
+      LClouds2.orig_1: -3796399198882309031
+      LClouds2.orig_10: 2493528284007740858
+      LClouds2.orig_11: 9161223195226240899
+      LClouds2.orig_12: 4638453323415638435
+      LClouds2.orig_13: -3651471369585728318
+      LClouds2.orig_14: 9124529639265944184
+      LClouds2.orig_15: -919441780077006275
+      LClouds2.orig_16: 580381945943416824
+      LClouds2.orig_17: -663817058534007863
+      LClouds2.orig_18: -2574563454486165237
+      LClouds2.orig_19: -6252602728757124610
+      LClouds2.orig_2: 5378172409229740902
+      LClouds2.orig_20: 6644568654994736625
+      LClouds2.orig_21: -3583754581267882929
+      LClouds2.orig_22: 6924330172327831288
+      LClouds2.orig_23: 8978990664864138429
+      LClouds2.orig_24: -3723933625520838630
+      LClouds2.orig_25: -4026041420246360281
+      LClouds2.orig_26: -3978425563813242904
+      LClouds2.orig_27: -3874051984220043588
+      LClouds2.orig_28: -8288078580476217679
+      LClouds2.orig_29: -7500150097588217718
+      LClouds2.orig_3: 8027857214760090316
+      LClouds2.orig_30: 8072362168689019998
+      LClouds2.orig_31: 1684886898352108138
+      LClouds2.orig_32: 3821770170390784152
+      LClouds2.orig_33: -8732864425134482573
+      LClouds2.orig_34: -704035896505154563
+      LClouds2.orig_4: 1224656248417625547
+      LClouds2.orig_5: -7781511100010157152
+      LClouds2.orig_6: -6451873472443525466
+      LClouds2.orig_7: 2962993059566247379
+      LClouds2.orig_8: 99634758146059636
+      LClouds2.orig_9: -4533994851374649844
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
