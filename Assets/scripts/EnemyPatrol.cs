@@ -10,6 +10,8 @@ public class EnemyPatrol : MonoBehaviour
 {
     [SerializeField] private float speed = 1.5f;
     [SerializeField] private float patrolDistance = 3f;
+    [SerializeField] private LayerMask obstacleLayer = 1 << 6; // Ground layer - statues, stones, etc.
+    [SerializeField] private float obstacleCheckDistance = 0.4f;
 
     private Vector3 startPos;
     private int direction = 1;
@@ -19,8 +21,13 @@ public class EnemyPatrol : MonoBehaviour
         startPos = transform.position;
     }
 
-    private void Update()
+private void Update()
     {
+        if (IsBlockedAhead(direction))
+        {
+            direction *= -1;
+        }
+
         transform.position += Vector3.right * (direction * speed * Time.deltaTime);
 
         float offset = transform.position.x - startPos.x;
@@ -36,5 +43,11 @@ public class EnemyPatrol : MonoBehaviour
         Vector3 scale = transform.localScale;
         scale.x = Mathf.Abs(scale.x) * (direction < 0 ? -1f : 1f);
         transform.localScale = scale;
+    }
+
+    private bool IsBlockedAhead(int dir)
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right * dir, obstacleCheckDistance, obstacleLayer);
+        return hit.collider != null;
     }
 }

@@ -1623,9 +1623,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 5614761499728885289}
+  targetCamera: {fileID: 0}
   normalSize: 5
   runSize: 6.2
   zoomLerpSpeed: 3
+  confinerBounds: {fileID: 0}
 --- !u!4 &249708165
 Transform:
   m_ObjectHideFlags: 0
@@ -8407,7 +8409,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -87.16249, y: 10.326861, z: -6.16452}
+  m_LocalPosition: {x: -87.65906, y: 10.326861, z: -6.16452}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children:
