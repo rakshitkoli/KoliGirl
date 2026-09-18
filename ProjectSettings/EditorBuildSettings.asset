@@ -74,5 +74,20 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level21.unity
     guid: 913afa99716db4a9d939acda7cc5efda
+  - enabled: 1
+    path: Assets/Scenes/Level22.unity
+    guid: 867f4aed896545eb90b005706a05402d
+  - enabled: 1
+    path: Assets/Scenes/Level23.unity
+    guid: 1a41ea0b3bea4be6a20b9f3b86762a85
+  - enabled: 1
+    path: Assets/Scenes/Level24.unity
+    guid: 52186a37aa1f4d41a6baf764c3c11998
+  - enabled: 1
+    path: Assets/Scenes/Level25.unity
+    guid: 1f0e9db3950b427eb1d901283b0b630f
+  - enabled: 1
+    path: Assets/Scenes/WinScreen.unity
+    guid: f6c2bb4ac7cbf4fa4b546f26fd6f60f1
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 31e7ecb48f1ce5a47a6208b59827f992, type: 2}
