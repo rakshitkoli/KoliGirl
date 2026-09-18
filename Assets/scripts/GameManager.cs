@@ -314,6 +314,13 @@ public class GameManager : MonoBehaviour
             yield break;
         }
 
+        // Level25 ends Act 1 on the WinScreen, whose Continue button goes to the Levels page -
+        // pre-arm that page to open on the Act 2 purchase page so the paywall is still surfaced.
+        if (nextSceneName == "WinScreen" && !LevelProgress.IsAct2Purchased())
+        {
+            LevelsPageToggle.OpenOnPurchasePageNext = true;
+        }
+
         SceneManager.LoadScene(nextSceneName);
     }
 }

@@ -7443,7 +7443,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -147.49678, y: 11.311473, z: -6.16452}
+  m_LocalPosition: {x: -86.15512, y: 11.311473, z: -6.16452}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -14399,7 +14399,7 @@ MonoBehaviour:
   livesPerLevel: 3
   livesText: {fileID: 1508246285}
   respawnInvulnerability: 1.5
-  nextSceneName: Level26
+  nextSceneName: WinScreen
   continuePanel: {fileID: 1283774951}
 --- !u!1 &1179455947
 GameObject:
