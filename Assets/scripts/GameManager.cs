@@ -300,7 +300,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(deathRestartDelay);
         ClearCheckpoint();
 
-        // Sequential level-to-level chaining (Level10 -> nextSceneName="Level11") would
+        // Sequential level-to-level chaining (Level25 -> nextSceneName="Level26") would
         // otherwise walk straight past the Act 2 paywall - nothing else sits in this path to
         // stop it. Redirect to the Levels page (opened straight to the page showing it) instead
         // of loading the locked level directly, so the player actually sees it needs purchasing.
@@ -309,7 +309,7 @@ public class GameManager : MonoBehaviour
             && nextLevelNumber.Value >= LevelProgress.Act2FirstLevel
             && !LevelProgress.IsAct2Purchased())
         {
-            LevelsPageToggle.OpenOnPage2Next = true;
+            LevelsPageToggle.OpenOnPurchasePageNext = true;
             SceneManager.LoadScene("Levels");
             yield break;
         }

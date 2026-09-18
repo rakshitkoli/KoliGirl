@@ -33443,7 +33443,7 @@ MonoBehaviour:
   livesPerLevel: 3
   livesText: {fileID: 1508246285}
   respawnInvulnerability: 1.5
-  nextSceneName: Level15
+  nextSceneName: Level30
   continuePanel: {fileID: 2131477594}
 --- !u!1 &1170953840
 GameObject:

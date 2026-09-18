@@ -8,8 +8,8 @@ using UnityEngine.UI;
 /// been completed. Clicking it (only possible when unlocked) loads "Level{levelNumber}".
 ///
 /// The lock icon is reserved for the Act 2 paywall only - a level that's simply not reached
-/// yet by progress (levels 1-10, or an unfinished 11-20 level after purchase) just dims instead.
-/// Levels 11+ ("Act 2") reuse the same lock icon, but with a twist: if the reason it's locked
+/// yet by progress (levels 1-25, or an unfinished 26-35 level after purchase) just dims instead.
+/// Levels 26+ ("Act 2") reuse the same lock icon, but with a twist: if the reason it's locked
 /// is "not purchased" rather than "haven't finished the previous level", the button stays
 /// tappable and a tap opens the purchase confirmation popup (see PurchasePromptUI) instead of
 /// doing nothing - no separate "Buy" UI needed.

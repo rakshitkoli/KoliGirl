@@ -7,15 +7,17 @@ using UnityEngine;
 /// sequential-unlock rule the Levels page and GameManager both read: Level1 is always
 /// unlocked, and LevelN (N > 1) unlocks once LevelN-1 is completed.
 ///
-/// Levels 11-20 ("Act 2") additionally require the one-time Act 2 purchase - see
+/// Levels 26-35 ("Act 2") additionally require the one-time Act 2 purchase - see
 /// IsAct2Purchased/SetAct2Purchased, driven by IAPManager's verified purchase callback rather
-/// than settable from anywhere else, so completion alone can't skip the paywall.
+/// than settable from anywhere else, so completion alone can't skip the paywall. Levels 11-20
+/// were relocated here from the original Act 2 slot; a fresh, unpaywalled set of levels now
+/// lives at 11-20 instead.
 /// </summary>
 public static class LevelProgress
 {
     private const string CompletedKeyPrefix = "LevelCompleted_";
     private const string Act2PurchasedKey = "Act2Purchased";
-    public const int Act2FirstLevel = 11;
+    public const int Act2FirstLevel = 26;
 
     public static void MarkCompleted(int levelNumber)
     {

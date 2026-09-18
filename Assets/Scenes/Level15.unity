@@ -31859,7 +31859,6 @@ Transform:
   - {fileID: 44263319}
   - {fileID: 1666457513}
   - {fileID: 1156586544}
-  - {fileID: 1409612282}
   - {fileID: 1250291661}
   - {fileID: 410997082}
   - {fileID: 2123881872}
@@ -32493,87 +32492,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1001 &900000301
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 824970984}
-    m_Modifications:
-    - target: {fileID: 1409612282, guid: 87d5300c90a24d4585939974826f5311, type: 3}
-      propertyPath: m_RootOrder
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1409612282, guid: 87d5300c90a24d4585939974826f5311, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.46
-      objectReference: {fileID: 0}
-    - target: {fileID: 1409612282, guid: 87d5300c90a24d4585939974826f5311, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.46
-      objectReference: {fileID: 0}
-    - target: {fileID: 1409612282, guid: 87d5300c90a24d4585939974826f5311, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.46
-      objectReference: {fileID: 0}
-    - target: {fileID: 1409612282, guid: 87d5300c90a24d4585939974826f5311, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1409612282, guid: 87d5300c90a24d4585939974826f5311, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -5.602964
-      objectReference: {fileID: 0}
-    - target: {fileID: 1409612282, guid: 87d5300c90a24d4585939974826f5311, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1409612282, guid: 87d5300c90a24d4585939974826f5311, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1409612282, guid: 87d5300c90a24d4585939974826f5311, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1409612282, guid: 87d5300c90a24d4585939974826f5311, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1409612282, guid: 87d5300c90a24d4585939974826f5311, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1409612282, guid: 87d5300c90a24d4585939974826f5311, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1409612282, guid: 87d5300c90a24d4585939974826f5311, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1409612282, guid: 87d5300c90a24d4585939974826f5311, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1409612282, guid: 87d5300c90a24d4585939974826f5311, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1409612283, guid: 87d5300c90a24d4585939974826f5311, type: 3}
-      propertyPath: speed
-      value: 2.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1409612283, guid: 87d5300c90a24d4585939974826f5311, type: 3}
-      propertyPath: patrolDistance
-      value: 3.5
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 87d5300c90a24d4585939974826f5311, type: 3}
 --- !u!1001 &900000302
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -51060,11 +50978,6 @@ MonoBehaviour:
   pulseSpeed: 2
   pulseStrength: 0.22
   sparkleRotateSpeed: 60
---- !u!4 &1409612282 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1409612282, guid: 87d5300c90a24d4585939974826f5311, type: 3}
-  m_PrefabInstance: {fileID: 900000301}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1411452071
 GameObject:
   m_ObjectHideFlags: 0
